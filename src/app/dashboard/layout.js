@@ -15,9 +15,10 @@ export default async function DashboardLayout({ children }) {
   if (!session) redirect("/signin");
 
   return (
- 
-        <DashboardSidebar session={session}>{children}</DashboardSidebar>
+    <DashboardSidebar session={session}>
+   
+        {children}
   
-    
+      </DashboardSidebar>
   );
 }

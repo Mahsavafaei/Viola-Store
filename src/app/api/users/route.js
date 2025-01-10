@@ -31,8 +31,17 @@ export async function PATCH(req) {
     await connectDB();
 
     const data = await req.json();
-    const { userId, enabled, role, name, lastName, email, phone, pass, gender } =
-      data;
+    const {
+      userId,
+      enabled,
+      role,
+      name,
+      lastName,
+      email,
+      phone,
+      pass,
+      gender,
+    } = data;
     // console.log(data)
 
     //pass is not important, admin maybe does not to chang it!
@@ -66,7 +75,7 @@ export async function PATCH(req) {
       const existingEmail = await User.findOne({ email });
       if (existingEmail) {
         return NextResponse.json(
-          { message: "حساب کاربری یا شماره تلفن وجود دارد" },
+          { error: "حساب کاربری یا شماره تلفن وجود دارد" },
           { status: 422 },
         );
       }
@@ -77,7 +86,7 @@ export async function PATCH(req) {
       const existingPhone = await User.findOne({ phone });
       if (existingPhone) {
         return NextResponse.json(
-          { message: "حساب کاربری یا شماره تلفن وجود دارد" },
+          { error: "حساب کاربری یا شماره تلفن وجود دارد" },
           { status: 422 },
         );
       }
@@ -92,18 +101,18 @@ export async function PATCH(req) {
       const hashedPassword = await hashPassword(pass);
       user.pass = hashedPassword;
     }
-   
-    await user.save()
-    
+
+    await user.save();
+
     return NextResponse.json(
-      {message: 'کاربر با موفقیت ویرایش شد'},
-      {status:201}
-    )
+      { message: "کاربر با موفقیت ویرایش شد" },
+      { status: 201 },
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      {message: 'مشکلی در سرور رخ داده است'},
-      {status:500}
-    )
+      { error: "مشکلی در سرور رخ داده است" },
+      { status: 500 },
+    );
   }
 }

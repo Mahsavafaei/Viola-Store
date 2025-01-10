@@ -9,10 +9,9 @@ import Footer from "./Footer";
 function DashboardSidebar({ session , children }) {
   const role = session.user.name[1]
 
-  // const [open, setOpen] = useState(false)
 
   return (
-    <>
+   
 
     <div className="relative max-h-screen overflow-hidden bg-lightColor/50">
       <aside className="fixed mt-16 inset-y-0 right-0 max-h-screen w-60 bg-white shadow-md max-md:hidden">
@@ -58,7 +57,7 @@ function DashboardSidebar({ session , children }) {
           </div>
         </div>
       </aside>
-       <NavBar/>
+       {/* <NavBar/> */}
       <main className="mr-60 min-h-screen overflow-auto rounded-3xl pt-16">
         <div className="px-6 py-8">
           <div className="mx-auto max-w-4xl">
@@ -68,10 +67,10 @@ function DashboardSidebar({ session , children }) {
           </div>
         </div>
       </main>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
     
-    </>
+  
   );
 }
 
