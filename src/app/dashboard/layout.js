@@ -14,11 +14,5 @@ export default async function DashboardLayout({ children }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/signin");
 
-  return (
-    <DashboardSidebar session={session}>
-   
-        {children}
-  
-      </DashboardSidebar>
-  );
+  return <DashboardSidebar session={session}>{children}</DashboardSidebar>;
 }

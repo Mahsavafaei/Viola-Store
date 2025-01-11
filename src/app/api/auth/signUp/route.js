@@ -9,10 +9,10 @@ export async function POST(req) {
 
     //checking req of frontend
     const data = await req.json();
-    const { name, lastName, email, phone, pass, gender , role , enabled} = data;
+    const { name, lastName, email, phone, pass, gender , role , enabled , image} = data;
 
     //validation
-    if (!name || !lastName || !email || !phone || !pass || !gender || !role || !enabled) {
+    if (!name || !lastName || !email || !phone || !pass || !gender || !role || !enabled ) {
       return NextResponse.json(
         { error: "لطفا اطلاعات معتبر وارد کنید!" },
         { status: 422 }
@@ -50,6 +50,7 @@ export async function POST(req) {
       phone,
       pass: hashedPassword,
       gender,
+      image
     });
 
     console.log(pass)

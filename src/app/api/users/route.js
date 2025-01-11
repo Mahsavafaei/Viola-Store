@@ -41,6 +41,7 @@ export async function PATCH(req) {
       phone,
       pass,
       gender,
+      image,
     } = data;
     // console.log(data)
 
@@ -68,6 +69,7 @@ export async function PATCH(req) {
     user.enabled = enabled;
     user.role = role;
     user.gender = gender;
+    user.image = image;
 
     //checking change information
 

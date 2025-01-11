@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import BackBtn from "@/components/modules/BackBtn";
+import { S3 } from "aws-sdk";
 
 function DashboardEditUserPage({ user }) {
   const router = useRouter();
@@ -18,6 +19,7 @@ function DashboardEditUserPage({ user }) {
     pass: user.pass,
     confirmPass: user.confirmPass,
     gender: user.gender,
+    image: user.image
   });
 
   const formChangeHandler = (event) => {
@@ -27,12 +29,61 @@ function DashboardEditUserPage({ user }) {
     setForm({ ...form, [name]: value });
   };
 
+  const fileHandler = (event) => {
+    setForm({ ...form, image: event.target.files[0] });
+    console.log(event.target.files[0]);
+  };
+
+  
+
   const editUserHandler = async (event) => {
     event.preventDefault();
     //VALIDATION
 
-    //signUp call (api)
 
+       let imageUrl = "";
+    
+        if (form.image !== "") {
+          try {
+            //Authorization
+            const ACCESS_KEY = process.env.NEXT_PUBLIC_LIARA_ACCESS_KEY;
+            const SECRET_KEY = process.env.NEXT_PUBLIC_LIARA_SECRET_KEY;
+            const ENDPOINT = process.env.NEXT_PUBLIC_LIARA_ENDPOINT;
+            const BUCKET = process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME;
+    
+            //Initialize S3 client
+            const s3 = new S3({
+              endpoint: ENDPOINT,
+              accessKeyId: ACCESS_KEY,
+              secretAccessKey: SECRET_KEY,
+            });
+    
+            const params = {
+              //name of th project
+              Bucket: BUCKET,
+              //name of the file as a key
+              Key: form.image.name,
+              // file itself
+              Body: form.image,
+            };
+            // Upload file to S3
+            const res = await s3.upload(params).promise();
+    
+            //Generate a permanent signed URL
+            const permanentSignedUrl = s3.getSignedUrl("getObject", {
+              Bucket: BUCKET,
+              Key: form.image.name,
+              Expires: 3153600000, //100years
+            });
+    
+            imageUrl = permanentSignedUrl;
+            console.log(imageUrl)
+          } catch (error) {
+            return alert(error.message);
+          }
+        }
+
+    //signUp call (api)
     const res = await fetch("/api/users", {
       method: "PATCH",
       body: JSON.stringify({
@@ -46,6 +97,7 @@ function DashboardEditUserPage({ user }) {
         phone: form.phone,
         pass: form.pass,
         gender: form.gender,
+        image: imageUrl
       }),
       headers: { "Content-Type": "application/json" },
     });
@@ -133,6 +185,7 @@ function DashboardEditUserPage({ user }) {
           value={form.confirmPass}
           onChange={formChangeHandler}
         />
+        <input type="file" name="image" onChange={fileHandler} />
         <select
           className="max-w-full"
           name="gender"
