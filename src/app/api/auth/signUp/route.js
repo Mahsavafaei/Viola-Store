@@ -12,7 +12,7 @@ export async function POST(req) {
     const { name, lastName, email, phone, pass, gender , role , enabled , image} = data;
 
     //validation
-    if (!name || !familyName || !phone || !email || !pass || !gender) {
+    if (!name || !lastName || !phone || !email || !pass || !gender) {
       return NextResponse.json(
         { error: 'لطفا اطلاعات معتبر وارد کنید.' },
         { status: 422 }

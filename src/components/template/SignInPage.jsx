@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Loader from "../modules/Loader";
 
 function SignInPage() {
   const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     email: "",
     pass: "",
@@ -21,6 +22,7 @@ function SignInPage() {
 
   const signInHandler = async (event) => {
     event.preventDefault();
+    setIsLoading(true)
     //VALIDATION
 
     //Handel signIn & send user to next page
@@ -32,8 +34,10 @@ function SignInPage() {
 
     if (result.error) {
       alert(result.error);
+      setIsLoading(false)
     } else {
       alert("رفتی تو سایت!");
+      setIsLoading(false)
       router.push("/dashboard");
     }
 
@@ -61,7 +65,9 @@ function SignInPage() {
           onChange={formChangeHandler}
         />
 
-        <button onClick={signInHandler}>ورود</button>
+        <button onClick={signInHandler}>
+          {isLoading ? <Loader/> : <span>ورود</span>}
+        </button>
       </form>
     </main>
   );

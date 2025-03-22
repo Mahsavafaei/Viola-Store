@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 
 import BackBtn from "@/components/modules/BackBtn";
 import { S3 } from "aws-sdk";
+import Loader from "@/components/modules/Loader";
 
 function DashboardAddUserPage() {
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [form, setForm] = useState({
     role: "",
@@ -21,6 +24,7 @@ function DashboardAddUserPage() {
     gender: "",
     image: "",
   });
+
 
   const formChangeHandler = (event) => {
     const value = event.target.value;
@@ -36,6 +40,8 @@ function DashboardAddUserPage() {
 
   const signUpHandler = async (event) => {
     event.preventDefault();
+    
+    setIsLoading(true);
     //VALIDATION
 
     let imageUrl = "";
@@ -101,6 +107,7 @@ function DashboardAddUserPage() {
 
     if (res.status === 201) {
       alert("کاربر با موفقیت افزوده شد");
+      setIsLoading(false);
       router.refresh();
     } else {
       alert(data.error);
@@ -112,10 +119,13 @@ function DashboardAddUserPage() {
       <BackBtn href={`/dashboard/users`} />
       <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-3 py-6 max-md:w-1/2 md:w-96">
         <h1>افزودن کاربر جدید</h1>
-        <select name="role" onChange={formChangeHandler} className="max-w-full">
-          <option value="" selected disabled>
-            نقش کاربر
-          </option>
+        <select
+          name="role"
+          onChange={formChangeHandler}
+          className="max-w-full"
+          value="نقش کاربر"
+        >
+          <option disabled>نقش کاربر</option>
           <option value="ADMIN">مدیر سایت</option>
           <option value="USER">کاربر عادی</option>
         </select>
@@ -123,10 +133,9 @@ function DashboardAddUserPage() {
           className="max-w-full"
           name="enabled"
           onChange={formChangeHandler}
+          value="وضعیت کاربر"
         >
-          <option value="" selected disabled>
-            وضعیت کاربر
-          </option>
+          <option disabled>وضعیت کاربر</option>
           <option value="true">فعال</option>
           <option value="false">غیرفعال</option>
         </select>
@@ -177,15 +186,16 @@ function DashboardAddUserPage() {
           className="max-w-full"
           name="gender"
           onChange={formChangeHandler}
+          value="جنسیت"
         >
-          <option disabled selected>
-            جنسیت
-          </option>
+          <option disabled>جنسیت</option>
           <option value="MAIL">آقا</option>
           <option value="FEMAIL">خانم</option>
         </select>
 
-        <button onClick={signUpHandler}>افزودن</button>
+        <button onClick={signUpHandler}>
+          {isLoading ? <Loader/> : <p>افزودن</p>}
+        </button>
       </form>
     </main>
   );

@@ -1,3 +1,4 @@
+
 import Product from "@/models/Product";
 import connectDB from "@/utils/connectDB";
 import { NextResponse } from "next/server";
@@ -25,16 +26,17 @@ export async function POST(req) {
       productName,
       productPrice,
       productSize,
-      productMaterial,
       productDesc,
       productImage,
-      productColor,
-      productWeight,
-      productBrand,
+      productWriter,
+      productLanguage,
+      productShabak,
+      productPageNum,
+      productYear,
     } = await req.json();
 
     //validation
-    if (!productName || !productPrice) {
+    if (!productName || !productPrice || !productSize  || !productDesc || !productWriter || !productLanguage || !productShabak || !productPageNum || !productYear) {
       return NextResponse.json(
         { error: "لطفا اطلاعات معتبر وارد کنید!" },
         { status: 400 }
@@ -45,12 +47,14 @@ export async function POST(req) {
         productName,
         productPrice,
         productSize,
-        productMaterial,
+       
         productDesc,
         productImage,
-        productColor,
-        productWeight,
-        productBrand,
+        productWriter,
+        productLanguage,
+        productShabak,
+        productPageNum,
+        productYear,
     })
 
     return NextResponse.json(

@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function DashboardUserPage({ user }) {
   const { _id, name, lastName, email, phone, image } = user;

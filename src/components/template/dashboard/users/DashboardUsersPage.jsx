@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/components/modules/Loader";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdPersonAddAlt1 } from "react-icons/md";
@@ -7,11 +8,11 @@ import { MdPersonAddAlt1 } from "react-icons/md";
 function DashboardUsersPage({ users }) {
   // pass users as a state to be clean code
   const [data, setData] = useState(users);
-
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log(data);
+
 
   const searchHandler = (e) => {
     const value = e.target.value;
@@ -40,16 +41,20 @@ function DashboardUsersPage({ users }) {
     }
   }, [searchValue]);
 
+  const showIsLoading = isLoading && <Loader/>
+
   return (
     <div className="h-screen">
       <div className="flex flex-wrap items-center justify-around">
         <Link
           className="flex w-fit items-center gap-2 rounded-xl bg-darkColor px-2 py-1 text-white"
           href="/dashboard/users/addUser"
+          onClick={()=> setIsLoading(true)}
         >
           <MdPersonAddAlt1 />
-          افزودن کاربر جدید
+        {isLoading ? showIsLoading : <span>  افزودن کاربر جدید</span>}
         </Link>
+        
         <input
           className="rounded border-2 border-darkColor px-2 py-1"
           type="text"

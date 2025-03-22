@@ -2,6 +2,7 @@
 import Link from "next/link";
 import LogoutBtn from "../modules/LogoutBtn";
 import { FaUsersCog } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
@@ -24,7 +25,9 @@ function DashboardSidebar({ session , children }) {
             </div>
             <div className="p-4">
               <ul className="space-y-1">
-               {role === "ADMIN" &&  <li>
+               {role === "ADMIN" && 
+               <>
+                <li>
                   <Link
                     href="/dashboard/users"
                     className="flex items-center rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black gap-2"
@@ -32,7 +35,18 @@ function DashboardSidebar({ session , children }) {
                     <FaUsersCog />
                     کاربران
                   </Link>
-                </li>}
+                </li>
+                  <li>
+                  <Link
+                    href="/dashboard/products"
+                    className="flex items-center rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black gap-2"
+                  >
+                  <AiFillProduct /> 
+                    محصولات
+                  </Link>
+                </li>
+                </>
+                }
               </ul>
             </div>
           </div>

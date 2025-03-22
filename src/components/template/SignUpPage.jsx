@@ -4,6 +4,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { S3 } from "aws-sdk";
+import Loader from "../modules/Loader";
+import { NextResponse } from "next/server";
 
 function SignUpPage() {
   const router = useRouter();
@@ -36,8 +38,9 @@ function SignUpPage() {
   const signUpHandler = async (event) => {
     event.preventDefault();
     setLoading(true)
+
     //VALIDATION
- let imageUrl = "";
+        let imageUrl = "";
     
         if (form.image !== "") {
           try {
@@ -78,50 +81,52 @@ function SignUpPage() {
             return alert(error.message);
           }
         }
+
     //signUp call (api)
+      const res = await fetch("/api/auth/signUp", {
+        method: "POST",
+        body: JSON.stringify({
+          name: form.name,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+          pass: form.pass,
+          gender: form.gender,
+          image: imageUrl
+        }),
+        headers: { "Content-Type": "application/json" },
+        
+      });
 
-    const res = await fetch("/api/auth/signUp", {
-      method: "POST",
-      body: JSON.stringify({
-        name: form.name,
-        lastName: form.lastName,
-        email: form.email,
-        phone: form.phone,
-        pass: form.pass,
-        gender: form.gender,
-        image: imageUrl
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
-
+    setLoading(false)
     console.log(form.pass)
+
     //Handel signIn & send user to next page
+  
     const data = await res.json();
     if (res.status === 201) {
       signInHandler();
     }
 
-    
-    const signInHandler = async () => {
-      const res = await signIn("credentials", {
-        email: form.email,
-        pass: form.pass,
-        redirect: false,
-      });
-
-      if (res.error) {
-        alert("نتونستی وارد سایت بشی!");
-      } else {
-        alert("  ثبت‌نامت با موفقیت انجام شد!");
-        router.push("/dashboard");
-      }
-    };
-   
-
-    
-    console.log(data);
-    // console.log(res.status)
   };
+
+  const signInHandler = async () => {
+    const res = await signIn("credentials", {
+      email: form.email,
+      pass: form.pass,
+      redirect: false,
+    });
+
+    if (res.error) {
+      alert("نتونستی وارد سایت بشی!");
+      
+    } else {
+      alert("  ثبت‌نامت با موفقیت انجام شد!");
+      router.push("/dashboard");
+    }
+  };
+ 
+
   return (
     <main>
       <form className=" max-md:w-1/2 md:w-96  mx-auto my-10 flex flex-col items-center justify-between gap-5 bg-lightColor/60 rounded px-3 py-6">
@@ -169,8 +174,8 @@ function SignUpPage() {
           onChange={formChangeHandler}
         />
          <input type="file" name="image" onChange={fileHandler} />
-        <select name="gender" onChange={formChangeHandler}>
-          <option disabled selected>
+        <select name="gender" value={'جنسیت'} onChange={formChangeHandler}>
+          <option disabled  >
             جنسیت
           </option>
           <option value="MAIL">آقا</option>
@@ -178,8 +183,8 @@ function SignUpPage() {
         </select>
 
         <button onClick={signUpHandler}>
-          {loading ? <p>is loading </p> : <p>  ثبت نام</p> }
-  
+          {loading ? <Loader/> :  <p>ثبت نام</p> }
+          {/* ثبت نام */}
         </button>
       </form>
     </main>
