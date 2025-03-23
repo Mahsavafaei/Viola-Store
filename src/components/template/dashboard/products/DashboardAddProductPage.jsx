@@ -101,19 +101,7 @@ function DashboardAddProductPage() {
 
     if (res.status === 201) {
       alert("محصول با موفقیت افزوده شد");
-      setForm(
-        {
-          name: "",
-          price: "",
-          pageNum: "",
-          writer: "",
-          year: "",
-          desc: "",
-          shabak: "",
-          language: "",
-          size: "",
-          image: "",}
-      )
+
       router.refresh();
     } else {
       alert(data.error);
@@ -123,6 +111,21 @@ function DashboardAddProductPage() {
 
   return (
     <main className="h-screen">
+      <button
+  className="cursor-pointer bg-gradient-to-b from-darkColor to-darkColor/75 shadow-[0px_4px_32px_0_rgba(99,102,241,.70)] px-6 py-3 rounded-xl border-[1px] border-slate-500 text-white font-medium group"
+>
+  <div className="relative overflow-hidden">
+    <p
+      className="group-hover:-translate-y-7 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)]"
+    >
+بازگشت    </p>
+    <p
+      className="absolute top-7 left-0 group-hover:top-0 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)]"
+    >
+      Button
+    </p>
+  </div>
+</button>
       <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-4 py-6 max-md:w-1/2 md:w-96">
         <h1>افزودن محصول جدید</h1>
         <input
