@@ -15,7 +15,8 @@ function DashboardUserPage({ user }) {
       <div className="text-center font-bold text-darkColor">
         {name + " " + lastName}
       </div>
-     
+      
+     {/* Edit */}
       <div>
         <button onClick={editHandler}>ویرایش کاربر</button>
       </div>

@@ -7,7 +7,7 @@ import { useState } from "react";
 function DashboardAddProductPage() {
   const router = useRouter();
 
- const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -27,15 +27,14 @@ function DashboardAddProductPage() {
     const name = e.target.name;
 
     setForm({ ...form, [name]: value });
-    
   };
   const fileHandler = (event) => {
     setForm({ ...form, image: event.target.files[0] });
-    console.log(event.target.files[0]);
+    // console.log(event.target.files[0]);
   };
 
   const addProductHandler = async (e) => {
-    setIsLoading(true)
+    setIsLoading(true);
     e.preventDefault();
 
     let imageUrl = "";
@@ -83,21 +82,22 @@ function DashboardAddProductPage() {
     const res = await fetch("/api/product", {
       method: "POST",
       body: JSON.stringify({
-        productName: form.name, // اینجا مطمئن شوید نام‌ها هماهنگ است  
-        productPrice: form.price,  
-        productSize: form.size,  
-        productDesc: form.desc,  
-        productImage: imageUrl,  
-        productWriter: form.writer,  
-        productLanguage: form.language,  
-        productShabak: form.shabak,  
-        productPageNum: form.pageNum,  
-        productYear: form.year,      }),
+        productName: form.name, // اینجا مطمئن شوید نام‌ها هماهنگ است
+        productPrice: form.price,
+        productSize: form.size,
+        productDesc: form.desc,
+        productImage: imageUrl,
+        productWriter: form.writer,
+        productLanguage: form.language,
+        productShabak: form.shabak,
+        productPageNum: form.pageNum,
+        productYear: form.year,
+      }),
       headers: { "Content-Type": "application/json" },
     });
 
     const data = await res.json();
-    console.log(data);
+    
 
     if (res.status === 201) {
       alert("محصول با موفقیت افزوده شد");
@@ -111,21 +111,16 @@ function DashboardAddProductPage() {
 
   return (
     <main className="h-screen">
-      <button
-  className="cursor-pointer bg-gradient-to-b from-darkColor to-darkColor/75 shadow-[0px_4px_32px_0_rgba(99,102,241,.70)] px-6 py-3 rounded-xl border-[1px] border-slate-500 text-white font-medium group"
->
-  <div className="relative overflow-hidden">
-    <p
-      className="group-hover:-translate-y-7 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)]"
-    >
-بازگشت    </p>
-    <p
-      className="absolute top-7 left-0 group-hover:top-0 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)]"
-    >
-      Button
-    </p>
-  </div>
-</button>
+      <button className="group cursor-pointer rounded-xl border-[1px] border-slate-500 bg-gradient-to-b from-darkColor to-darkColor/75 px-6 py-3 font-medium text-white shadow-[0px_4px_32px_0_rgba(99,102,241,.70)]">
+        <div className="relative overflow-hidden">
+          <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
+            بازگشت{" "}
+          </p>
+          <p className="absolute left-0 top-7 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
+          بازگشت
+          </p>
+        </div>
+      </button>
       <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-4 py-6 max-md:w-1/2 md:w-96">
         <h1>افزودن محصول جدید</h1>
         <input
@@ -222,7 +217,7 @@ function DashboardAddProductPage() {
               type="file"
               onChange={fileHandler}
               className="hidden"
-           />
+            />
           </label>
         </div>
         <select
@@ -231,7 +226,7 @@ function DashboardAddProductPage() {
           onChange={formChangeHandler}
           className="max-w-full rounded p-1 text-center"
         >
-          <option  disabled>قطع(اندازه)</option>
+          <option disabled>قطع(اندازه)</option>
           <option value="رقعی">رقعی</option>
           <option value="نیم رقعی">نیم رقعی</option>
           <option value="وزیری">وزیری</option>
@@ -243,10 +238,13 @@ function DashboardAddProductPage() {
           <option value="پالتویی کوچک">پالتویی کوچک</option>
           <option value="جیبی">جیبی</option>
         </select>
-       {isLoading ? <Loader/> :<button onClick={addProductHandler} className="bg-white">
-          افزودن
-        </button>}
-        
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <button onClick={addProductHandler} className="bg-white">
+            افزودن
+          </button>
+        )}
       </form>
     </main>
   );
