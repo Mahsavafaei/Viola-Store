@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { S3 } from "aws-sdk";
-import BackBtn from "@/components/modules/BackBtn";
+import toast, { Toaster } from "react-hot-toast"
+import BackBtn from "@/components/modules/buttons/BackBtn";
 import Loader from "@/components/modules/Loader";
 
 function DashboardEditUserPage({ user }) {
@@ -77,7 +78,7 @@ function DashboardEditUserPage({ user }) {
 
         imageUrl = permanentSignedUrl;
       } catch (error) {
-        return alert(error.message);
+        return toast.error(error.message);
       }
     }
 
@@ -104,16 +105,18 @@ function DashboardEditUserPage({ user }) {
     // console.log(form.pass);
 
     if (res.status === 201) {
-      alert("کاربر با موفقیت ویرایش شد");
+      toast.success("کاربر با موفقیت ویرایش شد");
 
       setIsLoading(false);
       router.refresh();
     } else {
-      alert(data.error);
+      toast.error(data.error);
     }
   };
   return (
     <main>
+      {/* alert */}
+      <Toaster/>
       {/* <button><Link href='/'>بازگشت </Link></button> */}
       <BackBtn href={`/dashboard/users`} />
       <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-3 py-6 max-md:w-1/2 md:w-96">

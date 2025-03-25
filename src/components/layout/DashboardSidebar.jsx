@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import LogoutBtn from "../modules/LogoutBtn";
+import LogoutBtn from "../modules/buttons/LogoutBtn";
 import { FaUsersCog } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 import { RxHamburgerMenu } from "react-icons/rx";

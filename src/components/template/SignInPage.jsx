@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Loader from "../modules/Loader";
+import toast, { Toaster } from "react-hot-toast";
 
 function SignInPage() {
   const router = useRouter();
@@ -12,6 +13,11 @@ function SignInPage() {
     email: "",
     pass: "",
   });
+
+  // const notif = (e) => {
+  //   e.preventDefault()
+
+  // }
 
   const formChangeHandler = (event) => {
     const value = event.target.value;
@@ -22,7 +28,7 @@ function SignInPage() {
 
   const signInHandler = async (event) => {
     event.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     //VALIDATION
 
     //Handel signIn & send user to next page
@@ -33,24 +39,24 @@ function SignInPage() {
     });
 
     if (result.error) {
-      alert(result.error);
-      setIsLoading(false)
+      toast.error(result.error);
+      setIsLoading(false);
     } else {
-      alert("رفتی تو سایت!");
-      setIsLoading(false)
+      toast.success("رفتی تو سایت!");
+      // toast.success('Successfully toasted!')
+      setIsLoading(false);
       router.push("/dashboard");
     }
-
-    console.log("form:", form);
- 
   };
+
   return (
     <main className="h-screen">
-      <form className=" max-md:w-1/2 md:w-96  mx-auto my-10 flex flex-col items-center justify-between gap-5 bg-lightColor/60 rounded px-3 py-6">
+      <Toaster />
+      <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-3 py-6 max-md:w-1/2 md:w-96">
         <h1>فرم ورود کاربر</h1>
 
         <input
-          className="rounded p-1 w-full"
+          className="w-full rounded p-1"
           type="email"
           placeholder="ایمیل"
           name="email"
@@ -58,7 +64,7 @@ function SignInPage() {
         />
 
         <input
-          className="rounded p-1 w-full"
+          className="w-full rounded p-1"
           type="password"
           placeholder="رمز عبور"
           name="pass"
@@ -66,7 +72,7 @@ function SignInPage() {
         />
 
         <button onClick={signInHandler}>
-          {isLoading ? <Loader/> : <span>ورود</span>}
+          {isLoading ? <Loader /> : <span>ورود</span>}
         </button>
       </form>
     </main>

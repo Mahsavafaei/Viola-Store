@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-import BackBtn from "@/components/modules/BackBtn";
+import toast, { Toaster } from "react-hot-toast"
+import BackBtn from "@/components/modules/buttons/BackBtn";
 import { S3 } from "aws-sdk";
 import Loader from "@/components/modules/Loader";
+import { IoMdAdd } from "react-icons/io";
 
 function DashboardAddUserPage() {
   const router = useRouter();
@@ -25,7 +26,6 @@ function DashboardAddUserPage() {
     image: "",
   });
 
-
   const formChangeHandler = (event) => {
     const value = event.target.value;
     const name = event.target.name;
@@ -40,7 +40,7 @@ function DashboardAddUserPage() {
 
   const signUpHandler = async (event) => {
     event.preventDefault();
-    
+
     setIsLoading(true);
     //VALIDATION
 
@@ -81,7 +81,7 @@ function DashboardAddUserPage() {
 
         imageUrl = permanentSignedUrl;
       } catch (error) {
-        return alert(error.message);
+        return toast.error(error.message);
       }
     }
 
@@ -106,15 +106,18 @@ function DashboardAddUserPage() {
     // console.log(form.pass);
 
     if (res.status === 201) {
-      alert("کاربر با موفقیت افزوده شد");
-      setIsLoading(false);
+      toast.success("کاربر با موفقیت افزوده شد");
       router.refresh();
     } else {
-      alert(data.error);
+     toast.error(data.error);
     }
+
+    setIsLoading(false);
   };
   return (
     <main>
+      {/* alert */}
+      <Toaster/>
       {/* <button><Link href='/'>بازگشت </Link></button> */}
       <BackBtn href={`/dashboard/users`} />
       <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-3 py-6 max-md:w-1/2 md:w-96">
@@ -193,9 +196,27 @@ function DashboardAddUserPage() {
           <option value="FEMAIL">خانم</option>
         </select>
 
-        <button onClick={signUpHandler}>
+        {/* <button onClick={signUpHandler}>
           {isLoading ? <Loader/> : <p>افزودن</p>}
-        </button>
+        </button> */}
+
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <button
+            onClick={signUpHandler}
+            className="group mx-auto flex max-w-fit cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-b from-darkColor to-darkColor/55 px-6 py-3 font-medium text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+          >
+            <div className="relative overflow-hidden">
+              <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
+                افزودن
+              </p>
+              <p className="absolute left-3 top-6 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
+                <IoMdAdd className="text-2xl" />
+              </p>
+            </div>
+          </button>
+        )}
       </form>
     </main>
   );

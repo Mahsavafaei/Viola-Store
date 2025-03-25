@@ -9,7 +9,7 @@ import { Logo } from "../../../public/index";
 import { FaCircleUser } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdCall, IoMdHome } from "react-icons/io";
-import LogoutBtn from "../modules/LogoutBtn";
+import LogoutBtn from "../modules/buttons/LogoutBtn";
 import { RxCross2 } from "react-icons/rx";
 import { BsFileTextFill } from "react-icons/bs";
 function NavBar() {

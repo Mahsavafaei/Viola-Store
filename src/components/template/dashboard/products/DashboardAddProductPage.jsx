@@ -1,8 +1,11 @@
 "use client";
+import BackBtn from "@/components/modules/buttons/BackBtn";
 import Loader from "@/components/modules/Loader";
 import { S3 } from "aws-sdk";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
+import { IoMdAdd, IoMdArrowRoundBack } from "react-icons/io";
 
 function DashboardAddProductPage() {
   const router = useRouter();
@@ -74,7 +77,7 @@ function DashboardAddProductPage() {
 
         imageUrl = permanentSignedUrl;
       } catch (error) {
-        return alert(error.message);
+        return toast.error(error.message);
       }
     }
 
@@ -97,31 +100,23 @@ function DashboardAddProductPage() {
     });
 
     const data = await res.json();
-    
 
     if (res.status === 201) {
-      alert("محصول با موفقیت افزوده شد");
+      toast.success("محصول با موفقیت افزوده شد");
 
       router.refresh();
     } else {
-      alert(data.error);
+      toast.error(data.error);
     }
     setIsLoading(false);
   };
 
   return (
     <main className="h-screen">
-      <button className="group cursor-pointer rounded-xl border-[1px] border-slate-500 bg-gradient-to-b from-darkColor to-darkColor/75 px-6 py-3 font-medium text-white shadow-[0px_4px_32px_0_rgba(99,102,241,.70)]">
-        <div className="relative overflow-hidden">
-          <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
-            بازگشت{" "}
-          </p>
-          <p className="absolute left-0 top-7 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
-          بازگشت
-          </p>
-        </div>
-      </button>
-      <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-4 py-6 max-md:w-1/2 md:w-96">
+      {/* alert */}
+      <Toaster/>
+      <BackBtn href={`/dashboard/products`} />
+      <form className="mx-auto mt-1 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-4 py-6 max-md:w-1/2 md:w-96">
         <h1>افزودن محصول جدید</h1>
         <input
           type="text"
@@ -241,8 +236,18 @@ function DashboardAddProductPage() {
         {isLoading ? (
           <Loader />
         ) : (
-          <button onClick={addProductHandler} className="bg-white">
-            افزودن
+          <button
+            onClick={addProductHandler}
+            className="group mx-auto flex max-w-fit cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-b from-darkColor to-darkColor/55 px-6 py-3 font-medium text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+          >
+            <div className="relative overflow-hidden">
+              <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
+                افزودن
+              </p>
+              <p className="absolute left-3 top-6 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
+                <IoMdAdd className="text-2xl" />
+              </p>
+            </div>
           </button>
         )}
       </form>
