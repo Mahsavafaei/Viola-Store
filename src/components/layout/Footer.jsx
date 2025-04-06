@@ -1,19 +1,19 @@
+"use client";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 import linkedin from "../../../public/footer/linkedin.png";
 import mail from "../../../public/footer/mail.png";
 import cellphone from "../../../public/footer/cellphone.png";
-import cloud from "../../../public/footer/cloud.png";
-import featherR from "../../../public/footer/featherR.png";
-import featherL from "../../../public/footer/featherL.png";
-import foggy from "../../../public/footer/foggy.png";
 import instagram from "../../../public/footer/instagram.png";
 
-import foggyFullSmall from "../../../public/footer/foggyFullSmall.png";
-import Image from "next/image";
-
 function Footer() {
+  const currentPage = usePathname();
+
   return (
-    <footer className="">
-      <div className="footer-gradient bg-white relative -z-[51] overflow-hidden px-24 pt-[100px] md:px-32 lg:px-10">
+    <footer
+      className={currentPage.startsWith("/dashboard") ? "hidden" : "block"}
+    >
+      <div className="footer-gradient relative -z-[51] overflow-hidden bg-white px-24 pt-[100px] md:px-32 lg:px-10">
         {/* <Image
           src={cloud}
           alt=""
@@ -95,7 +95,7 @@ function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

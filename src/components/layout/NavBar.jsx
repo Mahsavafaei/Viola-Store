@@ -1,20 +1,25 @@
 "use client";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FaQuestion, FaShopify, FaShoppingCart, FaStore } from "react-icons/fa";
+import LogoutBtn from "../modules/buttons/LogoutBtn";
+import { FaQuestion, FaShoppingCart, FaStore } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
 import { Logo } from "../../../public/index";
 import { FaCircleUser } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdCall, IoMdHome } from "react-icons/io";
-import LogoutBtn from "../modules/buttons/LogoutBtn";
 import { RxCross2 } from "react-icons/rx";
 import { BsFileTextFill } from "react-icons/bs";
+
+
 function NavBar() {
   const { data } = useSession();
-
+  
+  const currentPage =usePathname()
+  
   const [name, setName] = useState(""); //name
   const [auth, setAuth] = useState(""); //role
   const [open, setOpen] = useState(false); 
@@ -31,7 +36,10 @@ function NavBar() {
     setOpen(!open);
   };
   return (
-    <header>
+   
+
+    
+    <header className={currentPage.startsWith('/dashboard') ? 'hidden' : 'block'}>
       {/* mobile */}
       <div className="fixed right-0 top-0 flex w-full items-center bg-white py-2 lg:hidden">
 

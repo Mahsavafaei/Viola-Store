@@ -1,13 +1,7 @@
-
-import NavBar from "@/components/layout/NavBar";
-import "./globals.css";
-import Footer from "@/components/layout/Footer";
 import NextAuthProvider from "@/components/layout/NextAuthProvider";
-
-
-
-
-
+import "./globals.css";
+import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
 
 export const metadata = {
   title: "Viola | ",
@@ -17,15 +11,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      
+      <body>
         <NextAuthProvider>
-        <body>
-        <NavBar/>
-        {children}
-        <Footer/>
-        </body>
+          <NavBar />
+          {children}
+          <Footer />
         </NextAuthProvider>
-      
+      </body>
     </html>
   );
 }

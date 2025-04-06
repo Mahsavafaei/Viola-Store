@@ -1,21 +1,15 @@
-"use client"
+"use client";
 import Link from "next/link";
 import LogoutBtn from "../modules/buttons/LogoutBtn";
 import { FaUsersCog } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
-import { RxHamburgerMenu } from "react-icons/rx";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
 
-function DashboardSidebar({ session , children }) {
-  const role = session.user.name[1]
-
+function DashboardSidebar({ session, children }) {
+  const role = session.user.name[1];
 
   return (
-   
-
     <div className="relative max-h-screen overflow-hidden bg-lightColor/50">
-      <aside className="fixed mt-16 inset-y-0 right-0 max-h-screen w-60 bg-white shadow-md max-md:hidden">
+      <aside className="fixed inset-y-0 right-0 max-h-screen w-60 bg-white shadow-md max-md:hidden">
         <div className="flex h-full flex-col justify-between">
           <div className="flex-grow">
             <div className="border-b px-4 py-6 text-center">
@@ -25,32 +19,32 @@ function DashboardSidebar({ session , children }) {
             </div>
             <div className="p-4">
               <ul className="space-y-1">
-               {role === "ADMIN" && 
-               <>
-                <li>
-                  <Link
-                    href="/dashboard/users"
-                    className="flex items-center rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black gap-2"
-                  >
-                    <FaUsersCog />
-                    کاربران
-                  </Link>
-                </li>
-                  <li>
-                  <Link
-                    href="/dashboard/products"
-                    className="flex items-center rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black gap-2"
-                  >
-                  <AiFillProduct /> 
-                    محصولات
-                  </Link>
-                </li>
-                </>
-                }
+                {role === "ADMIN" && (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/users"
+                        className="flex items-center gap-2 rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black"
+                      >
+                        <FaUsersCog />
+                        کاربران
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/products"
+                        className="flex items-center gap-2 rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black"
+                      >
+                        <AiFillProduct />
+                        محصولات
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
-          <div className="p-4 flex items-center  gap-3">
+          <div className="flex items-center gap-3 p-4">
             <LogoutBtn />
             {/* <button onClick={logOutHandler}
               type="button"
@@ -71,7 +65,7 @@ function DashboardSidebar({ session , children }) {
           </div>
         </div>
       </aside>
-       {/* <NavBar/> */}
+
       <main className="mr-60 min-h-screen overflow-auto rounded-3xl pt-16">
         <div className="px-6 py-8">
           <div className="mx-auto max-w-4xl">
@@ -81,10 +75,7 @@ function DashboardSidebar({ session , children }) {
           </div>
         </div>
       </main>
-      {/* <Footer/> */}
     </div>
-    
-  
   );
 }
 
