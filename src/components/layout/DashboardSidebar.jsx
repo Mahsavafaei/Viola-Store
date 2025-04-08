@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import LogoutBtn from "../modules/buttons/LogoutBtn";
-import { FaUsersCog } from "react-icons/fa";
+import { FaShoppingCart, FaUsersCog } from "react-icons/fa";
 import { AiFillProduct } from "react-icons/ai";
 
 function DashboardSidebar({ session, children }) {
@@ -9,7 +9,7 @@ function DashboardSidebar({ session, children }) {
 
   return (
     <div className="relative max-h-screen overflow-hidden bg-lightColor/50">
-      <aside className="fixed inset-y-0 right-0 max-h-screen w-60 bg-white shadow-md max-md:hidden">
+      <aside className="fixed inset-y-0 right-0 max-h-screen w-60 bg-white shadow-md max-sm:hidden">
         <div className="flex h-full flex-col justify-between">
           <div className="flex-grow">
             <div className="border-b px-4 py-6 text-center">
@@ -19,7 +19,7 @@ function DashboardSidebar({ session, children }) {
             </div>
             <div className="p-4">
               <ul className="space-y-1">
-                {role === "ADMIN" && (
+                {role === "ADMIN" ? (
                   <>
                     <li>
                       <Link
@@ -40,6 +40,16 @@ function DashboardSidebar({ session, children }) {
                       </Link>
                     </li>
                   </>
+                ) : (
+                  <li>
+                    <Link
+                      href="/"
+                      className="flex items-center gap-2 rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black"
+                    >
+                      <FaShoppingCart />
+                      سبد خرید
+                    </Link>
+                  </li>
                 )}
               </ul>
             </div>
@@ -66,10 +76,56 @@ function DashboardSidebar({ session, children }) {
         </div>
       </aside>
 
-      <main className="mr-60 min-h-screen overflow-auto rounded-3xl pt-16">
+      <main className="mr-60 min-h-screen overflow-auto rou3xlnded- pt-16 max-sm:mr-0">
+        <article className="mx-auto flex w-1/2 flex-col rounded-3xl bg-white shadow-md sm:hidden">
+          <div className="flex-grow">
+            <div className="border-b px-4 py-6 text-center">
+              <Link href="/" className="text-xl font-bold leading-none">
+                <span className="text-darkColor">Viola</span>
+              </Link>
+            </div>
+            <div className="p-4">
+              <ul className="space-y-1">
+                {role === "ADMIN" ? (
+                  <>
+                    <li>
+                      <Link
+                        href="/dashboard/users"
+                        className="flex items-center gap-2 rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black"
+                      >
+                        <FaUsersCog />
+                        کاربران
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/dashboard/products"
+                        className="flex items-center gap-2 rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black"
+                      >
+                        <AiFillProduct />
+                        محصولات
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <li>
+                    <Link
+                      href="/"
+                      className="flex items-center gap-2 rounded-xl bg-lightColor/50 px-4 py-3 text-sm font-bold text-black"
+                    >
+                      <FaShoppingCart />
+                      سبد خرید
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        </article>
+
         <div className="px-6 py-8">
           <div className="mx-auto max-w-4xl">
-            <div className="mb-5 w-full rounded-3xl bg-white p-8">
+            <div className="mb-5 w-full rounded-3xl bg-white p-8 shadow-md">
               {children}
             </div>
           </div>
