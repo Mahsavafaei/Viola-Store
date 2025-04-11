@@ -1,6 +1,9 @@
 import HomePage from "@/components/template/HomePage";
-// import Image from "next/image";
 
-export default function Home() {
-  return <HomePage />;
+
+export default async function Home() {
+  const res = await fetch("http://localhost:3000//api/product", { method: "GET" });
+  const products = await res.json();
+ 
+  return <HomePage products={products} />;
 }

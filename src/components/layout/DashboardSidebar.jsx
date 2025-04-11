@@ -8,7 +8,7 @@ function DashboardSidebar({ session, children }) {
   const role = session.user.name[1];
 
   return (
-    <div className="relative max-h-screen overflow-hidden bg-lightColor/50">
+    <div className="relative min-h-[100vh] overflow-hidden bg-lightColor/50">
       <aside className="fixed inset-y-0 right-0 max-h-screen w-60 bg-white shadow-md max-sm:hidden">
         <div className="flex h-full flex-col justify-between">
           <div className="flex-grow">
