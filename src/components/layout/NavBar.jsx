@@ -53,7 +53,7 @@ function NavBar() {
         <div className="mx-auto">
           <Link href="/">
             {" "}
-            <Image src={Logo} alt="viola" className="mx-auto w-28" />
+            <Image src={Logo} alt="viola" className="mx-auto w-12" />
           </Link>
         </div>
 
@@ -144,7 +144,7 @@ function NavBar() {
           {/* Logo */}
           <Link href="/">
             {" "}
-            <Image src={Logo} alt="viola" className="mx-auto w-28" />
+            <Image src={Logo} alt="viola" className="mx-auto w-12" />
           </Link>
 
           {/* List */}

@@ -3,8 +3,11 @@ import { useRef } from "react";
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiOutlineHome } from "react-icons/ai";
-import { LuSearch, LuUserRound } from "react-icons/lu";
+import { LuBookCheck, LuSearch, LuUserRound } from "react-icons/lu";
 import { TbListDetails, TbShoppingBagCheck } from "react-icons/tb";
+import { BiSupport } from "react-icons/bi";
+import { LiaShippingFastSolid } from "react-icons/lia";
+import { RiTimerFlashLine } from "react-icons/ri";
 
 import Image from "next/image";
 import { BsCaretLeftFill } from "react-icons/bs";
@@ -22,11 +25,12 @@ function HomePage({ products }) {
 
   const data = products.products;
 
+
   return (
-    <main className="flex min-h-screen  w-full flex-col items-center justify-between bg-lightColor/60 pt-10">
-      <div className="parent flex w-full flex-col items-center justify-start min-h-screen ">
+    <main className="flex min-h-screen w-full flex-col items-center justify-between bg-lightColor/60 pt-10">
+      <div className="parent flex min-h-screen w-full flex-col items-center justify-start">
         {/* SearchBar */}
-        <div className="relative  w-3/4 mt-10 mb-5 md:mt-12">
+        <div className="relative mb-5 mt-10 w-3/4 md:mt-12">
           <input
             placeholder="جستجو در کتاب‌‌ها ..."
             className="input w-full rounded-2xl border-darkColor px-5 py-3 text-sm shadow-lg outline-none focus:border-2"
@@ -36,30 +40,31 @@ function HomePage({ products }) {
           />
           <LuSearch className="absolute left-3 top-3 text-gray-500" />
         </div>
- 
+
         {/* products */}
-        <div className="flex w-3/4 flex-wrap items-center justify-between gap-5  max-md:justify-center">
+        <div className="flex w-3/4 flex-wrap items-center justify-between gap-5 max-md:justify-center">
           {/* Card product */}
+
           {data.map((product, index) => (
             <div
-              className="flex w-64 flex-col items-center rounded-2xl gap-5  border-darkColor bg-white pt-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+              className="flex w-64 flex-col items-center gap-5 rounded-2xl border-darkColor bg-white pt-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
               key={index}
             >
-              <Link href={"/"} className="overflow-hidden">
+              <Link href={"/store/productDetails/"+product._id} className="overflow-hidden">
                 {" "}
                 <Image
                   width={100}
                   height={100}
                   src={product.productImage}
                   alt={product.productName}
-                  className="object-cover h-[200px] w-full transition-all duration-500 ease-in-out hover:scale-125 hover:opacity-65"
+                  className="h-[200px] w-full object-cover transition-all duration-500 ease-in-out hover:scale-125 hover:opacity-65"
                 />
               </Link>
 
               <div className="flex w-full flex-col items-center gap-5 p-4">
                 {/* eleman */}
                 <div className="flex w-full flex-col items-start gap-1 text-sm">
-                  <p className="font-bold text-darkColor  line-clamp-1 ">
+                  <p className="line-clamp-1 font-bold text-darkColor">
                     {product.productName}
                   </p>
                   <span className="font-bold">
@@ -69,17 +74,62 @@ function HomePage({ products }) {
                 </div>
                 {/* eleman */}
 
-                <div className=" flex w-full items-center justify-between">
+                <div className="flex w-full items-center justify-between">
                   <span className="cursor-pointer rounded-lg bg-darkColor p-1 text-white">
                     <TbShoppingBagCheck />
                   </span>
-                  <Link href={"/"} className="flex items-center text-darkColor">
+                  <Link
+                    href={"/store/productDetails/" + product._id}
+                    className="flex items-center text-darkColor"
+                  >
                     <span className="text-xs">جزئیات</span> <BsCaretLeftFill />{" "}
                   </Link>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+      </div>
+      {/* 4 parts */}
+      
+      <div className="my-16 grid grid-cols-2 gap-5 lg:gap-8 lg:grid-cols-4 w-3/4">
+      <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+          <div className="flex flex-col items-center gap-5 p-3 text-center">
+            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
+              {" "}
+              <LuBookCheck />
+            </span>
+            <p className="text-sm">ضمانت سلامت کتاب</p>
+          </div>
+        </div>
+       
+        <div className=" rounded-2xl w-full bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+          <div className="flex flex-col items-center gap-5 p-3 text-center">
+            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
+              {" "}
+              <LiaShippingFastSolid />
+            </span>
+            <p className="text-sm">ارسال بین‌المللی</p>
+          </div>
+        </div>
+      
+        <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+          <div className="flex flex-col items-center gap-5 p-3 text-center">
+            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
+              {" "}
+              <RiTimerFlashLine />
+            </span>
+            <p className="text-sm"> تحویل سریع</p>
+          </div>
+        </div>
+        <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+          <div className="flex flex-col items-center gap-5 p-3 text-center">
+            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
+              {" "}
+              <BiSupport />
+            </span>
+            <p className="text-sm">پشتیبانی</p>
+          </div>
         </div>
       </div>
       {/* NavigationBar mobile */}
@@ -91,7 +141,7 @@ function HomePage({ products }) {
             </Link>
           </li>
           <li>
-            <Link href={"/"}>
+            <Link href={"/dashboard"}>
               <LuUserRound />
             </Link>
           </li>

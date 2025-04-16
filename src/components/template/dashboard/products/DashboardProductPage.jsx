@@ -51,7 +51,7 @@ function DashboardProductPage({ product }) {
         {productName}
       </h1>
 
-      <div className="flex w-1/4 flex-row items-center justify-end">
+      <div className="flex w-1/4 flex-wrap gap-4 items-center  ">
         {/* Edit Btn */}
 
         <Link
@@ -59,14 +59,13 @@ function DashboardProductPage({ product }) {
           className="group ml-auto flex max-w-fit cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-b from-[#fbaf23] to-[#fbbe23]/50 px-4 py-3 font-medium text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         >
           {/* onClick={editProductHandler} */}
-          {/* <button  className="group ml-auto flex max-w-fit cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-b from-[#fbaf23] to-[#fbbe23]/50 px-4 py-3 font-medium text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"> */}
-          <div className="relative overflow-hidden">
-            <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
+          <div className="relative overflow-hidden max-sm:text-xs">
+            <p className="  duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
               ویرایش
             </p>
-            <p className="absolute left-4 top-6 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
-              {/* <IoMdArrowRoundBack className="text-xl" /> */}
-              <MdModeEdit className="text-xl" />
+            <p className="absolute max-sm:left-3 left-4 top-6 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
+     
+              <MdModeEdit className="text-xl max-sm:text-sm" />
             </p>
           </div>
         </Link>
@@ -76,12 +75,12 @@ function DashboardProductPage({ product }) {
           onClick={deleteProductHandler}
           className="group ml-auto flex max-w-fit cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-b from-[#f87171] to-[#f87171]/50 px-6 py-3 font-medium text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
         >
-          <div className="relative overflow-hidden">
-            <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
+          <div className="relative overflow-hidden max-sm:text-xs ">
+            <p className="  duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
               حذف
             </p>
-            <p className="absolute left-2 top-6 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
-              <MdDelete className="text-xl" />
+            <p className="absolute max-sm:left-1 left-2 top-6 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0">
+              <MdDelete className="text-xl max-sm:text-sm" />
             </p>
           </div>
         </button>
