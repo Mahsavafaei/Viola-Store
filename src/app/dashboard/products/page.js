@@ -2,6 +2,7 @@ import DashboardProductsPage from "@/components/template/dashboard/products/Dash
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import Product from "@/models/Product";
 
 
 export default async function Dashboard  () {
@@ -9,6 +10,7 @@ export default async function Dashboard  () {
     const role = session.user.name[1];
   
     if (role !== "ADMIN") redirect("/dashboard");
-    return (<DashboardProductsPage/> );
+    const products = await Product.find();
+    return (<DashboardProductsPage products={products} /> );
   }
   

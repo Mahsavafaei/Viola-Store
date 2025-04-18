@@ -65,6 +65,7 @@ function DashboardUsersPage({ users }) {
       <h1 className="mt-10 text-center text-2xl font-black text-darkColor">
         کاربران
       </h1>
+      {searchValue && <p className="text-center text-sm font-bold my-7">نتایج جست‌‌و‌جو برای عبارت"{searchValue}"</p>}
       <div className="mt-8 flex flex-col items-center justify-between gap-5">
         {searchValue ? (
           searchResult.length >= 1 ? (
