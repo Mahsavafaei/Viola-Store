@@ -10,7 +10,7 @@ import { MdDelete, MdModeEdit } from "react-icons/md";
 function DashboardProductPage({ product }) {
 
   const router = useRouter()
-  // console.log(product);
+  
   const {
     productName,
     productPrice,

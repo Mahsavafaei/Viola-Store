@@ -4,6 +4,8 @@ import vercel from './images/vercel.svg';
 // import Logo from './images/viola.svg';
 // import Logo from './images/logoViola.svg';
 import Logo from './images/y.png';
+import readingBook from './footer/studentGradute.json';
+import enamad from './footer/ENAMAD.png';
 
 
-export{next, vercel , Logo}
+export{next, vercel , Logo , readingBook , enamad}

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { MdPersonAddAlt1 } from "react-icons/md";
 
 function DashboardUsersPage({ users }) {
+  
   // pass users as a state to be clean code
   const [data, setData] = useState(users);
   const [searchValue, setSearchValue] = useState("");

@@ -3,6 +3,7 @@ import BackBtn from "@/components/modules/buttons/BackBtn";
 import Loader from "@/components/modules/Loader";
 import { S3 } from "aws-sdk";
 import { useRouter } from "next/navigation";
+import { Router } from "next/router";
 import { useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import { IoMdAdd, IoMdArrowRoundBack } from "react-icons/io";
@@ -103,12 +104,24 @@ function DashboardAddProductPage() {
 
     if (res.status === 201) {
       toast.success("محصول با موفقیت افزوده شد");
-
+      setIsLoading(false);
+      setForm({
+        name: "",
+        price: "",
+        pageNum: "",
+        writer: "",
+        year: "",
+        desc: "",
+        shabak: "",
+        language: "",
+        size: "",
+        image: "",
+      });
       router.refresh();
     } else {
       toast.error(data.error);
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -179,7 +192,7 @@ function DashboardAddProductPage() {
         <div className="flex w-full items-center justify-center">
           <label
             htmlFor="dropzone-file"
-            className="flex h-36 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 dark:hover:bg-gray-800"
+            className="flex h-36 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-300  dark:hover:border-gray-400 "
           >
             <div className="flex flex-col items-center justify-center pb-6 pt-5 text-center">
               <svg

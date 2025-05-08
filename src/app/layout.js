@@ -2,6 +2,7 @@ import NextAuthProvider from "@/components/layout/NextAuthProvider";
 import "./globals.css";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import CartProvider from "@/context/CartContext";
 
 export const metadata = {
   title: "Viola | دنیای شگفت‌انگیز کتاب",
@@ -12,11 +13,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body>
-        <NextAuthProvider>
-          <NavBar />
-          {children}
-          <Footer />
-        </NextAuthProvider>
+        <CartProvider>
+          <NextAuthProvider>
+            <NavBar />
+            {children}
+            <Footer />
+          </NextAuthProvider>
+        </CartProvider>
       </body>
     </html>
   );

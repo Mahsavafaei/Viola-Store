@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutBtn from "../modules/buttons/LogoutBtn";
@@ -13,17 +13,18 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdCall, IoMdHome } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { BsFileTextFill } from "react-icons/bs";
-
+import { CartContext } from "@/context/CartContext";
 
 function NavBar() {
   const { data } = useSession();
-  
-  const currentPage =usePathname()
-  
+  const {state:{itemsCounter} } = useContext(CartContext)
+
+  const currentPage = usePathname();
+
   const [name, setName] = useState(""); //name
   const [auth, setAuth] = useState(""); //role
-  const [open, setOpen] = useState(false); 
-  const [toggle, setToggle] = useState(false);
+  const [open, setOpen] = useState(false);
+  
 
   useEffect(() => {
     if (data) {
@@ -36,13 +37,15 @@ function NavBar() {
     setOpen(!open);
   };
   return (
-   
-
-    
-    <header className={currentPage.startsWith('/dashboard') ? 'hidden' : 'block'}>
+    <header
+      className={
+        currentPage.startsWith("/dashboard")
+          ? "hidden"
+          : "sticky top-0 z-50 block bg-white/95"
+      }
+    >
       {/* mobile */}
-      <div className="fixed right-0 top-0 flex w-full items-center bg-white py-2 lg:hidden">
-
+      <nav className="flex w-full items-center py-2 lg:hidden">
         {/* mobile hamburger*/}
         <div className="z-20">
           <button onClick={showNavBar} className="p-4 text-darkColor">
@@ -60,7 +63,8 @@ function NavBar() {
         {/* conditional icon & btnShop */}
 
         <div className="flex items-center gap-x-3 px-2">
-          <Link href="/">
+          <Link href="/checkout" className="relative">
+         {!!itemsCounter &&  <span className="text-white rounded-full px-1 text-[10px] bg-red-500 absolute -top-1 -right-1">{itemsCounter}</span>}
             <LuShoppingCart className="h-5 w-5" />
           </Link>
 
@@ -78,8 +82,9 @@ function NavBar() {
         </div>
 
         {/* mobile sideBar*/}
+        <div onClick={()=> setOpen(!open)} className={`bg-black/60 fixed top-0 right-0 h-screen w-screen ${open ? 'block' : 'hidden'}`}></div>
         <div
-          className={`fixed bottom-0 right-0 top-0 z-10 flex flex-col justify-between bg-white transition-all duration-300 ease-in-out lg:hidden ${open ? "w-64" : "w-0"}`}
+          className={`fixed h-full right-0 top-0 z-10 flex flex-col justify-between bg-white transition-all duration-300 ease-in-out lg:hidden ${open ? "w-60" : "w-0"}`}
         >
           {open && (
             <ul className="mt-20 flex flex-col justify-between gap-5 pr-3 font-black">
@@ -93,7 +98,7 @@ function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link className="flex items-center gap-2" href={"/"}>
+                <Link className="flex items-center gap-2" href={"/store"}>
                   {" "}
                   <span>
                     <FaStore />
@@ -102,21 +107,21 @@ function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link className="flex items-center gap-2" href={"/"}>
+                <Link className="flex items-center gap-2" href={"/checkout"}>
                   <span>
                     <FaShoppingCart />
                   </span>{" "}
                   سبد خرید
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link className="flex items-center gap-2" Link href={"/"}>
                   <span>
                     <BsFileTextFill />
                   </span>
                   مقالات
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link className="flex items-center gap-2" Link href={"/"}>
                   <span>
@@ -136,10 +141,10 @@ function NavBar() {
             </ul>
           )}
         </div>
-      </div>
+      </nav>
 
       {/* tablet * desktop  */}
-      <nav className="fixed right-0 top-0 m-auto hidden w-full items-center gap-5 bg-white px-10 py-3 lg:flex">
+      <nav className="m-auto hidden w-full items-center gap-5 px-10 py-3 lg:flex">
         <div className="mx-auto flex w-[96%] max-w-[1490px] items-center justify-between">
           {/* Logo */}
           <Link href="/">
@@ -153,14 +158,14 @@ function NavBar() {
               <Link href={"/"}>خانه</Link>
             </li>
             <li>
-              <Link href={"/"}>محصولات</Link>
+              <Link href={"/store"}>محصولات</Link>
             </li>
             <li>
-              <Link href={"/"}>سبد خرید</Link>
+              <Link href={"/checkout"}>سبد خرید</Link>
             </li>
-            <li>
+            {/* <li>
               <Link href={"/"}>مقالات</Link>
-            </li>
+            </li> */}
             <li>
               <Link href={"/"}>تماس با ما</Link>
             </li>
@@ -172,9 +177,12 @@ function NavBar() {
           {/* conditional icon & btnShop */}
 
           <div className="flex items-center gap-5">
-            <Link href="/">
-              <LuShoppingCart className="h-5 w-5" />
-            </Link>
+        
+
+            <Link href="/checkout" className="relative">
+         {!!itemsCounter &&  <span className="text-white rounded-full px-1 text-[10px] bg-red-500 absolute -top-1 -right-1">{itemsCounter}</span>}
+            <LuShoppingCart className="h-5 w-5" />
+          </Link>
 
             {data ? (
               <div>

@@ -1,4 +1,4 @@
-import ProductDetailsPage from "@/components/modules/store/ProductDetailsPage";
+import ProductDetailsPage from "@/components/template/store/ProductDetailsPage";
 import Product from "@/models/Product";
 
 

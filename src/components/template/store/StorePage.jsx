@@ -1,37 +1,31 @@
 "use client";
-import { useContext, useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { CartContext } from "@/context/CartContext";
 import { productQuantity } from "@/helpers/helper";
-import Accordion from "../modules/Accordion";
-
-import { FiShoppingCart } from "react-icons/fi";
+import Image from "next/image";
+import Link from "next/link";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { LuBookCheck, LuSearch, LuUserRound } from "react-icons/lu";
-import {  TbShoppingBagCheck } from "react-icons/tb";
-import { BiSupport } from "react-icons/bi";
-import { LiaShippingFastSolid } from "react-icons/lia";
-import { RiTimerFlashLine } from "react-icons/ri";
 import { BsCaretLeftFill } from "react-icons/bs";
-import { MdDeleteOutline, MdOutlineMoreHoriz } from "react-icons/md";
+import { FiShoppingCart } from "react-icons/fi";
+import { LuSearch, LuUserRound } from "react-icons/lu";
+import { MdDeleteOutline } from "react-icons/md";
+import { TbShoppingBagCheck } from "react-icons/tb";
 
-
-function HomePage({ products }) {
-
+function StorePage({ products }) {
   const { state, dispatch } = useContext(CartContext);
-  const [data, setData] = useState(products.products);
-  const limitedProducts = data.slice(0, 10);
+  const [searchValue, setSearchValue] = useState();
+  const [searchResult, setSearchResult] = useState();
 
+  const data = products.products;
+ 
 
- 
- 
-  
+  // گرفتن آی‌دی‌های محصولات
   const uniId = data.map((product) => product._id);
 
+  // مقدار کمیت هر محصول بر اساس آی‌دی‌ها
   const quantities = uniId.map((id) => productQuantity(state, id));
-
-//Save cartData to localStorage =>
+  
+  //Save cartData to localStorage =>
   // Retrieve cart data from localStorage when the component loads
   useEffect(() => {
     const savedCart = localStorage.getItem("cartData");
@@ -44,17 +38,12 @@ function HomePage({ products }) {
     localStorage.setItem("cartData", JSON.stringify(state));
   }, [state]);
 
- 
   const clickHandler = (e, type, product) => {
     e.preventDefault();
     dispatch({ type, payload: product });
-    
   };
 
-  const [searchValue, setSearchValue] = useState();
-  const [searchResult, setSearchResult] = useState();
-
-  //search click
+  //search
   const inputRef = useRef(null);
   const inputRefHandler = () => {
     setTimeout(() => {
@@ -63,7 +52,6 @@ function HomePage({ products }) {
       }
     }, 0);
   };
-
   const searchProductHandler = (e) => {
     const value = e.target.value;
     setSearchValue(value);
@@ -87,11 +75,9 @@ function HomePage({ products }) {
       search();
     }
   }, [searchValue]);
-
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-between bg-lightColor/60">
-     
-
+    <main className="flex min-h-screen w-full flex-col items-center justify-between bg-lightColor/60 pb-10">
+      <h1 className="mt-4 text-2xl font-black text-darkColor">محصولات</h1>
       {/* SearchBar */}
       <div className="relative my-8 w-3/4">
         <input
@@ -155,7 +141,7 @@ function HomePage({ products }) {
                     </button>
                     <Link
                       href={"/store/productDetails/" + product._id}
-                      className="flex items-center text-darkColor"
+              
                     >
                       <span className="text-xs">جزئیات</span>{" "}
                       <BsCaretLeftFill />{" "}
@@ -171,7 +157,7 @@ function HomePage({ products }) {
           )
         ) : (
           /* Card product */
-          limitedProducts.map((product, index) => (
+          data.map((product, index) => (
             // const quantity = quantities[index]
             <div
               className="flex w-64 flex-col items-center gap-5 rounded-2xl border-darkColor bg-white pt-2 shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
@@ -213,15 +199,15 @@ function HomePage({ products }) {
                     >
                       <TbShoppingBagCheck />
                     </button>
-                  ) : ( 
+                  ) : (
                     <button
                       onClick={(e) => clickHandler(e, "INCREASE", product)}
                       className="h-6 w-6 cursor-pointer rounded-lg bg-darkColor leading-6 text-white"
                     >
                       +
                     </button>
-                   )} 
-                    {quantities[index] >= 1 && <span>{quantities[index]}</span>}
+                  )}
+                  {quantities[index] >= 1 && <span>{quantities[index]}</span>}
                   {quantities[index] === 1 && (
                     <button
                       onClick={(e) => clickHandler(e, "REMOVE_ITEM", product)}
@@ -229,7 +215,7 @@ function HomePage({ products }) {
                     >
                       <MdDeleteOutline />
                     </button>
-                   )} 
+                  )}
 
                   {quantities[index] > 1 && (
                     <button
@@ -251,83 +237,6 @@ function HomePage({ products }) {
             </div>
           ))
         )}
-      </div>
-      {/* btn more */}
-      <Link
-        href={"/store"}
-        className="group my-8 flex max-w-fit cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-b from-darkColor to-darkColor/55 px-6 py-3 font-medium text-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
-      >
-        <div className="relative overflow-hidden max-sm:text-xs">
-          <p className="duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-7">
-            مشاهده بیش‌تر
-          </p>
-          <p className="absolute left-8 top-5 duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:top-0 max-sm:left-7 max-sm:top-4">
-            <MdOutlineMoreHoriz className="text-4xl max-sm:text-xl" />
-          </p>
-        </div>
-      </Link>
-
-       {/* Accordion */}
-       <h3 className="text-darkColor font-black mt-10 text-xl">سوالات متداول</h3>
-       <div className="mt-5 w-3/4 rounded-2xl bg-white p-4">
-      <Accordion
-        title=" چرا باید کتاب‌های مختلف رو بخونم؟"
-        answer=" هر کتاب دنیایی جدید و هیجان‌انگیز رو برات باز می‌کنه، تجربیات تازه می‌سازه و دیدت رو گسترش میده. با هر صفحه، بخش جدیدی از خودت رو کشف می‌کنی."
-      />
-        <Accordion
-          title="چطور می‌تونم کتاب مناسب رو پیدا کنم؟"
-          answer="ما بهترین‌ها رو جمع‌آوری کردیم! فقط کافی‌یه نوع علاقه‌ت رو انتخاب کنی یا بر اساس پیشنهادهای ما، کتابی رو برگزینی که دلت می‌طلبه. سفر به دنیای کتاب‌ها منتظرته!
-
-"
-        />
-        <Accordion
-          title="آیا خرید کتاب‌های آنلاین امن است؟"
-          answer=" صددرصد! با روش‌های امن و مطمئن، کتاب‌ها به درب منزلت می‌رسن، و تو فقط باید لذت مطالعه رو تجربه کنی. راحت و بی‌دغدغه، دنیای کتاب‌ها رو به خانه‌ات بیار!
-
-"
-        />
-      </div>
-
-      {/* 4 parts */}
-      <div className="my-16 grid w-3/4 grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-8">
-        <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          <div className="flex flex-col items-center gap-5 p-3 text-center">
-            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
-              {" "}
-              <LuBookCheck />
-            </span>
-            <p className="text-sm">ضمانت سلامت کتاب</p>
-          </div>
-        </div>
-
-        <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          <div className="flex flex-col items-center gap-5 p-3 text-center">
-            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
-              {" "}
-              <LiaShippingFastSolid />
-            </span>
-            <p className="text-sm">ارسال بین‌المللی</p>
-          </div>
-        </div>
-
-        <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          <div className="flex flex-col items-center gap-5 p-3 text-center">
-            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
-              {" "}
-              <RiTimerFlashLine />
-            </span>
-            <p className="text-sm"> تحویل سریع</p>
-          </div>
-        </div>
-        <div className="w-full rounded-2xl bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          <div className="flex flex-col items-center gap-5 p-3 text-center">
-            <span className="rounded-2xl bg-lightColor/25 p-3 text-2xl text-darkColor/95">
-              {" "}
-              <BiSupport />
-            </span>
-            <p className="text-sm">پشتیبانی</p>
-          </div>
-        </div>
       </div>
       {/* NavigationBar mobile */}
       <div className="fixed bottom-2 left-1/2 flex -translate-x-1/2 transform items-center justify-center rounded-2xl bg-darkColor p-4 text-white shadow-2xl max-lg:w-3/4 lg:hidden">
@@ -354,8 +263,33 @@ function HomePage({ products }) {
           </li>
         </ul>
       </div>
+      {/* NavigationBar mobile */}
+      <div className="fixed bottom-2 left-1/2 flex -translate-x-1/2 transform items-center justify-center rounded-2xl bg-darkColor p-4 text-white shadow-2xl max-lg:w-3/4 lg:hidden">
+        <ul className="flex w-full justify-between gap-5 font-black max-[320px]:gap-1 sm:justify-around">
+          <li>
+            <Link href={"/"}>
+              <FiShoppingCart />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/dashboard"}>
+              <LuUserRound />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/store"} onClick={inputRefHandler}>
+              <LuSearch />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/"}>
+              <AiOutlineHome />
+            </Link>
+          </li>
+        </ul>
+      </div>
     </main>
   );
 }
 
-export default HomePage;
+export default StorePage;

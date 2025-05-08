@@ -10,7 +10,7 @@ function MainDashboardPage({ userName, role }) {
       </h1>
       {role === "ADMIN" ? (
         <p p className="mt-5 p-5 text-center leading-8">
-          مدیر عزیز با استفاده از منوی سمت راست مدیریت و تنظیمات سایت خود را
+          مدیر گرامی با استفاده از منوی سمت راست مدیریت و تنظیمات سایت خود را
           آغاز کنید.
         </p>
       ) : (

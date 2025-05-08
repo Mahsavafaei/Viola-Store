@@ -50,9 +50,9 @@ function SignInPage() {
   };
 
   return (
-    <main className="h-screen">
+    <main className="max-h-screen">
       <Toaster />
-      <form className="mx-auto my-10 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-3 py-6 max-md:w-1/2 md:w-96">
+      <form className="mx-auto mt-10 mb-36 flex flex-col items-center justify-between gap-5 rounded bg-lightColor/60 px-3 py-6 max-md:w-1/2 md:w-96">
         <h1>فرم ورود کاربر</h1>
 
         <input

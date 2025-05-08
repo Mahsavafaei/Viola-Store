@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BackBtn from "../buttons/BackBtn";
+import BackBtn from "../../modules/buttons/BackBtn";
 
 async function ProductDetailsPage({ product }) {
   const {
