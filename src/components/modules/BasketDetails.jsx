@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 function BasketDetails({ data , clickHandler }) {
   
   return (
-    <div className="flex justify-between items-center p-5 rounded-2xl h-40 shadow-xl bg-white border mb-5 gap-5">
+    <div className="flex justify-between  items-center p-5 rounded-2xl h-40 shadow-xl bg-white border mb-5 gap-5">
       <Image
         height={70}
         width={70}

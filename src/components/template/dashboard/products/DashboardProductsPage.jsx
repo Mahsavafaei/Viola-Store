@@ -2,10 +2,12 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdOutlineAddBusiness } from "react-icons/md";
+import Loader from "@/components/modules/Loader";
 
 function DashboardProductsPage({ products }) {
   //define data to be clean code in future for pagination or ...
   const [data, setData] = useState(products);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchValue, setSearchValue] = useState();
   const [searchResult, setSearchResult] = useState();
@@ -34,18 +36,23 @@ function DashboardProductsPage({ products }) {
     }
   }, [searchValue]);
 
+  const showIsLoading = isLoading && <Loader/>
+
   return (
-    <div className="h-screen">
-      <div className="flex flex-wrap items-center justify-around">
+    <div className="min-h-screen">
+      <div className="flex flex-wrap items-center justify-around gap-5">
         <Link
-          className="flex w-fit items-center gap-2 rounded-xl bg-darkColor px-2 py-1 text-white"
+          className="flex w-fit items-center gap-2 rounded-xl bg-darkColor px-4  py-2 text-white"
           href="/dashboard/products/addProduct"
+          onClick={()=> setIsLoading(true)}
         >
           <MdOutlineAddBusiness />
-          افزودن محصول جدید
+          {isLoading ? showIsLoading : <span>  افزودن محصول جدید</span>}
+
+       
         </Link>
         <input
-          className="rounded border-2 border-darkColor px-2 py-1"
+          className="rounded-xl border-2 border-darkColor px-2 py-1"
           type="text"
           placeholder="جستجو محصول"
           onChange={searchProductHandler}
@@ -64,8 +71,8 @@ function DashboardProductsPage({ products }) {
                 key={index}
                 className="group flex w-full items-center justify-between rounded-xl bg-midColor px-3 py-2 text-white"
               >
-                <div className="flex w-1/4 items-center justify-between gap-1">
-                  <p>{product.productName}</p>
+                <div className="flex w-2/4 items-center justify-between gap-1">
+                  <p className="truncate">{product.productName}</p>
                   <p>{product.productPrice}</p>
                 </div>
                 {/* <div className="flex w-1/4 items-center justify-end gap-2">
@@ -89,16 +96,11 @@ function DashboardProductsPage({ products }) {
               key={index}
               className="group flex w-full items-center justify-between rounded-xl bg-midColor px-3 py-2 text-white"
             >
-              <div className="flex w-1/4 items-center justify-between gap-1">
-                <p>{product.productName}</p>
+              <div className="flex w-2/4  items-center justify-items-center justify-between gap-2">
+                <p className="truncate">{product.productName}</p>
                 <p>{product.productPrice}</p>
               </div>
-              {/* <div className="flex w-1/4 items-center justify-end gap-2">
-          
-            <span className="rounded bg-white px-2 py-1 text-darkColor group-hover:bg-white/70">
-              حذف 
-            </span>
-            </div> */}
+           
               <span className="rounded bg-white px-2 py-1 text-darkColor group-hover:bg-white/70">
                 مشاهده
               </span>

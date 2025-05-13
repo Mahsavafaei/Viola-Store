@@ -23,6 +23,10 @@ import { TbCreditCardPay, TbShoppingBagCheck } from "react-icons/tb";
 import BasketDetails from "../BasketDetails";
 import { useSession } from "next-auth/react";
 import Loader from "../Loader";
+import { FiShoppingCart } from "react-icons/fi";
+import { LuSearch, LuShoppingCart, LuUserRound } from "react-icons/lu";
+import { AiOutlineHome } from "react-icons/ai";
+import Link from "next/link";
 
 function CheckoutPage({ products }) {
   const { state, dispatch } = useContext(CartContext);
@@ -117,8 +121,8 @@ function CheckoutPage({ products }) {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-[#F4F6F8] py-[100px]">
-      <div className="flex w-[1150px] flex-row-reverse items-center justify-evenly gap-6 p-6 max-md:flex-col">
+    <div className="flex min-h-screen w-full items-center justify-center bg-[#F4F6F8] pb-10">
+      <div className="flex w-[1150px] flex-row-reverse items-center justify-evenly gap-10 p-6 max-md:flex-col">
         {!state.itemsCounter ? (
           <p className="text-xl font-bold text-red-500">سبد خرید خالی است!</p>
         ) : (
@@ -273,7 +277,7 @@ function CheckoutPage({ products }) {
               </div>
             </div>
             {/* details card  */}
-            <div>
+            <div className="w-2/3">
               {state.selectedItems.map((product) => (
                 <BasketDetails
                   data={product}
@@ -284,6 +288,31 @@ function CheckoutPage({ products }) {
             </div>
           </>
         )}
+      </div>
+         {/* NavigationBar mobile */}
+         <div className="fixed bottom-2 left-1/2 flex -translate-x-1/2 transform items-center justify-center rounded-2xl bg-darkColor p-4 text-white shadow-2xl max-lg:w-3/4 lg:hidden">
+        <ul className="flex w-full justify-between gap-5 font-black max-[320px]:gap-1 sm:justify-around">
+          <li>
+            <Link href={"/"}>
+              <FiShoppingCart />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/dashboard"}>
+              <LuUserRound />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/store"} >
+            <LuShoppingCart />
+            </Link>
+          </li>
+          <li>
+            <Link href={"/"}>
+              <AiOutlineHome />
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
   );

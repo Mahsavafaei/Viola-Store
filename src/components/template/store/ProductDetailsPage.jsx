@@ -18,12 +18,12 @@ async function ProductDetailsPage({ product }) {
 
   return (
     <div className="mx-auto min-h-screen max-w-full  bg-lightColor/50">
-      <div className="mt-12 w-full p-6">
+      <div className="pb-14 w-full p-6">
         <div className="flex flex-col justify-between gap-5">
 
           {/* BackBtn */}
           <div className="flex min-w-full items-center pt-10">
-            <BackBtn href={"/"} />
+            <BackBtn href={"/store"} />
           </div>
 
           <Image
@@ -33,18 +33,19 @@ async function ProductDetailsPage({ product }) {
             width={150}
             height={150}
           />
-
+       <div className="bg-white shadow-xl w-full sm:max-w-[900px] mx-auto p-5 rounded-2xl">
           <ul className="flex flex-col justify-between gap-5 text-justify text-gray-600">
-            <li>{"نام کتاب:  " + productName}</li>
-            <li>{"📏اندازه:  " + productSize}</li>
+            <li>{"📕نام کتاب:  " + productName}</li>
             <li> {"🏷️قیمت:      " + productPrice + " تومان "}</li>
-            <li>{"#️⃣شابک: " + productShabak}</li>
             <li>{"📄تعدادصفحه: " + productPageNum}</li>
-            <li>{"⏱️سال انتشار: " + productYear}</li>
+            <li>{"📏اندازه:  " + productSize}</li>
             <li>{"🔠زبان: " + productLanguage}</li>
             <li>{"✍نویسنده: " + productWriter}</li>
+            <li>{"#️⃣شابک: " + productShabak}</li>
+            <li>{"⏱️سال انتشار: " + productYear}</li>
             <li>{"💬توضیحات: " + productDesc}</li>
           </ul>
+          </div>
         </div>
       </div>
     </div>

@@ -13,7 +13,7 @@ function LogoutBtn() {
     <button
       onClick={logOutHandler}
       type="button"
-      className="inline-flex h-9 items-center justify-center rounded-xl bg-gray-900 px-4 text-sm font-semibold text-gray-300 transition hover:text-white"
+      className="inline-flex h-9 items-center justify-center rounded-xl bg-gray-900 px-3 text-sm font-semibold text-gray-300 transition hover:text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

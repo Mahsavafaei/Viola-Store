@@ -242,7 +242,7 @@ function StorePage({ products }) {
       <div className="fixed bottom-2 left-1/2 flex -translate-x-1/2 transform items-center justify-center rounded-2xl bg-darkColor p-4 text-white shadow-2xl max-lg:w-3/4 lg:hidden">
         <ul className="flex w-full justify-between gap-5 font-black max-[320px]:gap-1 sm:justify-around">
           <li>
-            <Link href={"/"}>
+            <Link href={"/checkout"}>
               <FiShoppingCart />
             </Link>
           </li>
@@ -263,31 +263,7 @@ function StorePage({ products }) {
           </li>
         </ul>
       </div>
-      {/* NavigationBar mobile */}
-      <div className="fixed bottom-2 left-1/2 flex -translate-x-1/2 transform items-center justify-center rounded-2xl bg-darkColor p-4 text-white shadow-2xl max-lg:w-3/4 lg:hidden">
-        <ul className="flex w-full justify-between gap-5 font-black max-[320px]:gap-1 sm:justify-around">
-          <li>
-            <Link href={"/"}>
-              <FiShoppingCart />
-            </Link>
-          </li>
-          <li>
-            <Link href={"/dashboard"}>
-              <LuUserRound />
-            </Link>
-          </li>
-          <li>
-            <Link href={"/store"} onClick={inputRefHandler}>
-              <LuSearch />
-            </Link>
-          </li>
-          <li>
-            <Link href={"/"}>
-              <AiOutlineHome />
-            </Link>
-          </li>
-        </ul>
-      </div>
+  
     </main>
   );
 }

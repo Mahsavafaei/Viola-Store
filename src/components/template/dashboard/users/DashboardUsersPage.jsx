@@ -45,19 +45,19 @@ function DashboardUsersPage({ users }) {
   const showIsLoading = isLoading && <Loader/>
 
   return (
-    <div className="h-screen">
-      <div className="flex flex-wrap items-center justify-around">
+    <div className="min-h-screen">
+      <div className="flex flex-wrap items-center justify-around gap-5">
         <Link
-          className="flex w-fit items-center gap-2 rounded-xl bg-darkColor px-2 py-1 text-white"
+          className="flex w-fit items-center gap-2 rounded-xl bg-darkColor px-5 py-2 text-white"
           href="/dashboard/users/addUser"
           onClick={()=> setIsLoading(true)}
         >
-          <MdPersonAddAlt1 />
-        {isLoading ? showIsLoading : <span>  افزودن کاربر جدید</span>}
+          <MdPersonAddر جدید</span>}Alt1 />
+        {isLoading ? showIsLoading : <span>  افزودن کارب
         </Link>
         
         <input
-          className="rounded border-2 border-darkColor px-2 py-1"
+          className="rounded-xl border-2 border-darkColor px-2 py-1 "
           type="text"
           placeholder="جستجو کاربر"
           onChange={searchHandler}

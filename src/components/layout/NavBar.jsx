@@ -123,7 +123,7 @@ function NavBar() {
                 </Link>
               </li> */}
               <li>
-                <Link className="flex items-center gap-2" Link href={"/"}>
+                <Link className="flex items-center gap-2"  href={"/"}>
                   <span>
                     <IoMdCall />
                   </span>
@@ -153,7 +153,7 @@ function NavBar() {
           </Link>
 
           {/* List */}
-          <ul className="mx-4 flex items-center justify-around gap-x-4 text-sm 2xl:text-base">
+          <ul className="mr-32 flex items-center justify-around gap-x-4 text-sm 2xl:text-base">
             <li>
               <Link href={"/"}>خانه</Link>
             </li>
@@ -176,7 +176,7 @@ function NavBar() {
 
           {/* conditional icon & btnShop */}
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-1">
         
 
             <Link href="/checkout" className="relative">
