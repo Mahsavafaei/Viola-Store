@@ -6,14 +6,11 @@ import { useEffect, useState } from "react";
 import { MdPersonAddAlt1 } from "react-icons/md";
 
 function DashboardUsersPage({ users }) {
-  
   // pass users as a state to be clean code
   const [data, setData] = useState(users);
   const [searchValue, setSearchValue] = useState("");
   const [searchResult, setSearchResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-
 
   const searchHandler = (e) => {
     const value = e.target.value;
@@ -42,7 +39,7 @@ function DashboardUsersPage({ users }) {
     }
   }, [searchValue]);
 
-  const showIsLoading = isLoading && <Loader/>
+  const showIsLoading = isLoading && <Loader />;
 
   return (
     <div className="min-h-screen">
@@ -50,14 +47,14 @@ function DashboardUsersPage({ users }) {
         <Link
           className="flex w-fit items-center gap-2 rounded-xl bg-darkColor px-5 py-2 text-white"
           href="/dashboard/users/addUser"
-          onClick={()=> setIsLoading(true)}
+          onClick={() => setIsLoading(true)}
         >
-          <MdPersonAddر جدید</span>}Alt1 />
-        {isLoading ? showIsLoading : <span>  افزودن کارب
+          <MdPersonAdd />
+          {isLoading ? showIsLoading : <span> افزودن کاربر جدید</span>}
         </Link>
-        
+
         <input
-          className="rounded-xl border-2 border-darkColor px-2 py-1 "
+          className="rounded-xl border-2 border-darkColor px-2 py-1"
           type="text"
           placeholder="جستجو کاربر"
           onChange={searchHandler}
@@ -66,7 +63,11 @@ function DashboardUsersPage({ users }) {
       <h1 className="mt-10 text-center text-2xl font-black text-darkColor">
         کاربران
       </h1>
-      {searchValue && <p className="text-center text-sm font-bold my-7">نتایج جست‌‌و‌جو برای عبارت"{searchValue}"</p>}
+      {searchValue && (
+        <p className="my-7 text-center text-sm font-bold">
+          نتایج جست‌‌و‌جو برای عبارت"{searchValue}"
+        </p>
+      )}
       <div className="mt-8 flex flex-col items-center justify-between gap-5">
         {searchValue ? (
           searchResult.length >= 1 ? (
