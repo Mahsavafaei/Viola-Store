@@ -93,7 +93,7 @@ function StorePage({ products }) {
       </div>
       {searchValue && (
         <p className="my-7 text-center text-sm font-bold">
-          نتایج جست‌‌و‌جو برای عبارت"{searchValue}"
+          نتایج جست‌‌و‌جو برای عبارت`&ldquo;`{searchValue}`&ldquo;`
         </p>
       )}
       {/* products */}
