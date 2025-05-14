@@ -3,7 +3,7 @@
 import Loader from "@/components/modules/Loader";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { MdPersonAddAlt1 } from "react-icons/md";
+import { MdPersonAdd, MdPersonAddAlt1 } from "react-icons/md";
 
 function DashboardUsersPage({ users }) {
   // pass users as a state to be clean code
@@ -65,7 +65,7 @@ function DashboardUsersPage({ users }) {
       </h1>
       {searchValue && (
         <p className="my-7 text-center text-sm font-bold">
-          نتایج جست‌‌و‌جو برای عبارت"{searchValue}"
+          نتایج جست‌‌و‌جو برای عبارت`&ldquo;`{searchValue}`&ldquo;`
         </p>
       )}
       <div className="mt-8 flex flex-col items-center justify-between gap-5">

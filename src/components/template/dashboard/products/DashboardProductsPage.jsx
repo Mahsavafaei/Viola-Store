@@ -61,7 +61,7 @@ function DashboardProductsPage({ products }) {
       <h1 className="mt-10 text-center text-2xl font-black text-darkColor">
         محصولات
       </h1>
-      {searchValue && <p className="text-center text-sm font-bold my-7">نتایج جست‌‌و‌جو برای عبارت"{searchValue}"</p>}
+      {searchValue && <p className="text-center text-sm font-bold my-7">نتایج جست‌‌و‌جو برای عبارت`&ldquo;`{searchValue}`&ldquo;`</p>}
       <div className="mt-8 flex flex-col items-center justify-between gap-5">
         {searchValue ? (
           searchResult && searchResult.length >= 1 ? (
