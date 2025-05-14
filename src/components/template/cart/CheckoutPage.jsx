@@ -17,12 +17,12 @@ import {
   MdOutlineEdit,
   MdOutlinePublishedWithChanges,
 } from "react-icons/md";
-import NoLogin from "../NoLogin";
+import NoLogin from "../../modules/NoLogin";
 
 import { TbCreditCardPay, TbShoppingBagCheck } from "react-icons/tb";
-import BasketDetails from "../BasketDetails";
+import BasketDetails from "../../modules/BasketDetails";
 import { useSession } from "next-auth/react";
-import Loader from "../Loader";
+import Loader from "../../modules/Loader";
 import { FiShoppingCart } from "react-icons/fi";
 import { LuSearch, LuShoppingCart, LuUserRound } from "react-icons/lu";
 import { AiOutlineHome } from "react-icons/ai";

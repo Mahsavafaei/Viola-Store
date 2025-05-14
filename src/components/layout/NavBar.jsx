@@ -123,7 +123,7 @@ function NavBar() {
                 </Link>
               </li> */}
               <li>
-                <Link className="flex items-center gap-2"  href={"/"}>
+                <Link className="flex items-center gap-2"  href={"/contactus"}>
                   <span>
                     <IoMdCall />
                   </span>
@@ -131,7 +131,7 @@ function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link className="flex items-center gap-2" href={"/"}>
+                <Link className="flex items-center gap-2" href={"/aboutus"}>
                   <span>
                     <FaQuestion />
                   </span>
@@ -167,10 +167,10 @@ function NavBar() {
               <Link href={"/"}>مقالات</Link>
             </li> */}
             <li>
-              <Link href={"/"}>تماس با ما</Link>
+              <Link href={"/contactus"}>تماس با ما</Link>
             </li>
             <li>
-              <Link href={"/"}>درباره ما</Link>
+              <Link href={"/aboutus"}>درباره ما</Link>
             </li>
           </ul>
 

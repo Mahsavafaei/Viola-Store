@@ -1,4 +1,4 @@
-import CheckoutPage from "@/components/modules/cart/CheckoutPage";
+import CheckoutPage from "@/components/template/cart/CheckoutPage";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { getSession, useSession } from "next-auth/react";
