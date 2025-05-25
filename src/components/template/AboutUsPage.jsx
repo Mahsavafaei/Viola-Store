@@ -1,8 +1,34 @@
+'use client'
 import { FaInstagram } from "react-icons/fa";
 import { SlLocationPin } from "react-icons/sl";
 import { GiBlackBook } from "react-icons/gi";
 import { PiBookBold, PiListHeartBold } from "react-icons/pi";
-function AboutUsPage() {
+import { productQuantity } from "@/helpers/helper";
+import { useContext, useEffect } from "react";
+import { CartContext } from "@/context/CartContext";
+function AboutUsPage({products}) {
+
+  //Save cartData to localStorage =>
+  const { state, dispatch } = useContext(CartContext);
+    const data = products.products;
+  // گرفتن آی‌دی‌های محصولات
+  const uniId = data.map((product) => product._id);
+
+  // مقدار کمیت هر محصول بر اساس آی‌دی‌ها
+  const quantities = uniId.map((id) => productQuantity(state, id));
+  
+  // Retrieve cart data from localStorage when the component loads
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cartData");
+    if (savedCart) {
+      dispatch({ type: "SET_CART", payload: JSON.parse(savedCart) });
+    }
+  }, [dispatch]);
+   // Save updated cart state to localStorage
+   useEffect(() => {
+    localStorage.setItem("cartData", JSON.stringify(state));
+  }, [state]);
+
   return (
     <main className="min-h-screen bg-lightColor/50 pb-20">
       <h1 className="py-10 text-center text-3xl font-black text-darkColor">

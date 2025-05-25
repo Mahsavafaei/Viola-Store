@@ -144,8 +144,9 @@ function NavBar() {
       </nav>
 
       {/* tablet * desktop  */}
-      <nav className="m-auto hidden w-full items-center gap-5 px-10 py-3 lg:flex">
-        <div className="mx-auto flex w-[96%] max-w-[1490px] items-center justify-between">
+      <nav className="m-auto hidden w-full items-center gap-5  py-3 lg:flex">
+        {/* <div className="mx-auto flex w-[96%] max-w-[1490px] items-center justify-between"> */}
+        <div className="mx-auto flex w-3/4 items-center justify-between">
           {/* Logo */}
           <Link href="/">
             {" "}

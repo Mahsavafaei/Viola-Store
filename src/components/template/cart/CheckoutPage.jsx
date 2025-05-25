@@ -27,6 +27,8 @@ import { FiShoppingCart } from "react-icons/fi";
 import { LuSearch, LuShoppingCart, LuUserRound } from "react-icons/lu";
 import { AiOutlineHome } from "react-icons/ai";
 import Link from "next/link";
+import {emptyCart} from "../../../../public/index"
+import Image from "next/image";
 
 function CheckoutPage({ products }) {
   const { state, dispatch } = useContext(CartContext);
@@ -124,7 +126,7 @@ function CheckoutPage({ products }) {
     <div className="flex min-h-screen w-full items-center justify-center bg-[#F4F6F8] pb-10">
       <div className="flex w-[1150px] flex-row-reverse items-center justify-evenly gap-10 p-6 max-md:flex-col">
         {!state.itemsCounter ? (
-          <p className="text-xl font-bold text-red-500">سبد خرید خالی است!</p>
+          <div className="text-xl flex flex-col items-center gap-16 font-bold text-red-500"> <span>سبد خرید خالی است!</span> <Image src={emptyCart} width={400} height={400} alt='empty-cart' /> </div>
         ) : (
           <>
             <div className="bg-lightBlue/20 top-[70px] flex h-fit w-full max-w-[410px] flex-col justify-between gap-6 self-center rounded-2xl p-3 shadow-xl max-md:mt-[40px] md:sticky md:w-[80%] md:self-start md:p-7">

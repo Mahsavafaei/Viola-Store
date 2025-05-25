@@ -268,8 +268,8 @@ function HomePage({ products }) {
       </Link>
 
        {/* Accordion */}
-       <h3 className="text-darkColor font-black mt-10 text-xl">سوالات متداول</h3>
-       <div className="mt-5 w-3/4 rounded-2xl bg-white p-4">
+       <h3 className="text-darkColor font-black mt-10 text-2xl">سوالات متداول</h3>
+       <div className="mt-5 w-3/4 rounded-2xl bg-white p-4  shadow-xl">
       <Accordion
         title=" چرا باید کتاب‌های مختلف رو بخونم؟"
         answer=" هر کتاب دنیایی جدید و هیجان‌انگیز رو برات باز می‌کنه، تجربیات تازه می‌سازه و دیدت رو گسترش میده. با هر صفحه، بخش جدیدی از خودت رو کشف می‌کنی."

@@ -6,6 +6,7 @@ import vercel from './images/vercel.svg';
 import Logo from './images/y.png';
 import readingBook from './footer/studentGradute.json';
 import enamad from './footer/ENAMAD.png';
+import emptyCart from './images/emptyCart.svg';
 
 
-export{next, vercel , Logo , readingBook , enamad}
+export{next, vercel , Logo , readingBook , enamad , emptyCart}
