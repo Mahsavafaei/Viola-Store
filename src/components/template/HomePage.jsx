@@ -9,29 +9,27 @@ import Accordion from "../modules/Accordion";
 import { FiShoppingCart } from "react-icons/fi";
 import { AiOutlineHome } from "react-icons/ai";
 import { LuBookCheck, LuSearch, LuUserRound } from "react-icons/lu";
-import {  TbShoppingBagCheck } from "react-icons/tb";
+import { TbShoppingBagCheck } from "react-icons/tb";
 import { BiSupport } from "react-icons/bi";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { RiTimerFlashLine } from "react-icons/ri";
 import { BsCaretLeftFill } from "react-icons/bs";
 import { MdDeleteOutline, MdOutlineMoreHoriz } from "react-icons/md";
+import SwiperComponent from "../modules/Swiper";
+
+
 
 
 function HomePage({ products }) {
-
   const { state, dispatch } = useContext(CartContext);
   const [data, setData] = useState(products.products);
   const limitedProducts = data.slice(0, 10);
 
-
- 
- 
-  
   const uniId = data.map((product) => product._id);
 
   const quantities = uniId.map((id) => productQuantity(state, id));
 
-//Save cartData to localStorage =>
+  //Save cartData to localStorage =>
   // Retrieve cart data from localStorage when the component loads
   useEffect(() => {
     const savedCart = localStorage.getItem("cartData");
@@ -39,16 +37,14 @@ function HomePage({ products }) {
       dispatch({ type: "SET_CART", payload: JSON.parse(savedCart) });
     }
   }, [dispatch]);
-   // Save updated cart state to localStorage
-   useEffect(() => {
+  // Save updated cart state to localStorage
+  useEffect(() => {
     localStorage.setItem("cartData", JSON.stringify(state));
   }, [state]);
 
- 
   const clickHandler = (e, type, product) => {
     e.preventDefault();
     dispatch({ type, payload: product });
-    
   };
 
   const [searchValue, setSearchValue] = useState();
@@ -90,8 +86,7 @@ function HomePage({ products }) {
 
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-between bg-lightColor/60">
-     
-
+     <SwiperComponent/>
       {/* SearchBar */}
       <div className="relative my-8 w-3/4">
         <input
@@ -110,6 +105,7 @@ function HomePage({ products }) {
           نتایج جست‌‌و‌جو برای عبارت`&ldquo;`{searchValue}`&ldquo;`
         </p>
       )}
+
       {/* products */}
       <div className="flex w-3/4 flex-wrap items-center justify-between gap-5 max-md:justify-center">
         {searchValue ? (
@@ -213,15 +209,15 @@ function HomePage({ products }) {
                     >
                       <TbShoppingBagCheck />
                     </button>
-                  ) : ( 
+                  ) : (
                     <button
                       onClick={(e) => clickHandler(e, "INCREASE", product)}
                       className="h-6 w-6 cursor-pointer rounded-lg bg-darkColor leading-6 text-white"
                     >
                       +
                     </button>
-                   )} 
-                    {quantities[index] >= 1 && <span>{quantities[index]}</span>}
+                  )}
+                  {quantities[index] >= 1 && <span>{quantities[index]}</span>}
                   {quantities[index] === 1 && (
                     <button
                       onClick={(e) => clickHandler(e, "REMOVE_ITEM", product)}
@@ -229,7 +225,7 @@ function HomePage({ products }) {
                     >
                       <MdDeleteOutline />
                     </button>
-                   )} 
+                  )}
 
                   {quantities[index] > 1 && (
                     <button
@@ -267,13 +263,15 @@ function HomePage({ products }) {
         </div>
       </Link>
 
-       {/* Accordion */}
-       <h3 className="text-darkColor font-black mt-10 text-2xl">سوالات متداول</h3>
-       <div className="mt-5 w-3/4 rounded-2xl bg-white p-4  shadow-xl">
-      <Accordion
-        title=" چرا باید کتاب‌های مختلف رو بخونم؟"
-        answer=" هر کتاب دنیایی جدید و هیجان‌انگیز رو برات باز می‌کنه، تجربیات تازه می‌سازه و دیدت رو گسترش میده. با هر صفحه، بخش جدیدی از خودت رو کشف می‌کنی."
-      />
+      {/* Accordion */}
+      <h3 className="mt-10 text-2xl font-black text-darkColor">
+        سوالات متداول
+      </h3>
+      <div className="mt-5 w-3/4 rounded-2xl bg-white p-4 shadow-xl">
+        <Accordion
+          title=" چرا باید کتاب‌های مختلف رو بخونم؟"
+          answer=" هر کتاب دنیایی جدید و هیجان‌انگیز رو برات باز می‌کنه، تجربیات تازه می‌سازه و دیدت رو گسترش میده. با هر صفحه، بخش جدیدی از خودت رو کشف می‌کنی."
+        />
         <Accordion
           title="چطور می‌تونم کتاب مناسب رو پیدا کنم؟"
           answer="ما بهترین‌ها رو جمع‌آوری کردیم! فقط کافی‌یه نوع علاقه‌ت رو انتخاب کنی یا بر اساس پیشنهادهای ما، کتابی رو برگزینی که دلت می‌طلبه. سفر به دنیای کتاب‌ها منتظرته!

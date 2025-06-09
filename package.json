@@ -22,6 +22,7 @@
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.4.0",
     "react-loader-spinner": "^6.1.6",
+    "swiper": "^11.2.8",
     "vercel": "^42.1.1"
   },
   "devDependencies": {
