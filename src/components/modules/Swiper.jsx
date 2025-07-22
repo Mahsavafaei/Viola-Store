@@ -21,14 +21,14 @@ function SwiperComponent() {
         clickable: true,
       }}
       autoplay={{
-        delay: 2800,
+        delay: 3000,
         disableOnInteraction: false,
       }}
       navigation={true}
       modules={[Autoplay, Pagination, Navigation]}
       className="mySwiper m-auto mt-8 h-96 w-3/4 rounded-2xl max-md:mt-0 max-md:h-full max-md:w-full max-md:rounded-none"
     >
-      <SwiperSlide className="flex items-center justify-center bg-[#ffffffdf] text-center">
+      {/* <SwiperSlide className="flex items-center justify-center bg-[#ffffffdf] text-center">
         <Image
           className="h-full w-full"
           src={bookImage1}
@@ -36,8 +36,8 @@ function SwiperComponent() {
           width={600}
           height={600}
         />
-      </SwiperSlide>
-      <SwiperSlide className="flex items-center justify-center bg-[#ffffffdf] text-center">
+      </SwiperSlide> */}
+      <SwiperSlide className="flex items-center justify-center bg-[#83ab77] object-cover text-center">
         <Image
           className="h-full w-full"
           src={bookImage3}
@@ -46,27 +46,17 @@ function SwiperComponent() {
           height={600}
         />
       </SwiperSlide>
-      <SwiperSlide className="flex items-center justify-center bg-[#ffffffdf] text-center">
+      
+      <SwiperSlide className="flex items-center justify-center bg-[#8fbae4] text-center">
         <Image
-          className="h-full w-full"
-          src={bookImage4}
-          alt="bookImage"
-          width={600}
-          height={600}
-        />
-      </SwiperSlide>
-      <SwiperSlide className="flex items-center justify-center bg-[#ffffffdf] text-center">
-        <Image
-          className="h-full w-full"
+          className="h-full w-full  object-contain"
           src={book1}
           alt="bookImage"
           width={600}
           height={600}
         />
       </SwiperSlide>
-      <SwiperSlide className="flex items-center justify-center bg-[#ffffffdf] text-center">
-        Slide 6
-      </SwiperSlide>
+      
     </Swiper>
   );
 }
