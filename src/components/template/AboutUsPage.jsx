@@ -74,7 +74,7 @@ function AboutUsPage({products}) {
             src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d202.39983447576685!2d51.407987444582346!3d35.741037134691425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDQ0JzI3LjgiTiA1McKwMjQnMjguNCJF!5e0!3m2!1sfa!2s!4v1747231610416!5m2!1sfa!2s"
             className="h-full w-full rounded-2xl border-none"
             title="viola-location"
-            allowfullScreen=""
+            allowFullScreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>

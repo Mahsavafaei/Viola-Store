@@ -1,4 +1,6 @@
 "use client";
+import React, { Suspense, lazy } from 'react';
+const LazyLottie = lazy(() => import('lottie-react'));
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import linkedin from "../../../public/footer/linkedin.png";
@@ -96,13 +98,21 @@ function Footer() {
       
 
     
-          <Lottie
+          {/* <Lottie
          
           animationData={readingBook}
           className=""
           loop={true}
           style={{ height: "350px" }}
+        /> */}
+         <Suspense fallback={<div>در حال بارگذاری...</div>}>
+        <LazyLottie
+          animationData={readingBook}
+          className=""
+          loop={true}
+          style={{ height: "350px" }}
         />
+      </Suspense>
         </div>
            {/*copyright*/}
            <div className="z-20 flex mb-6 mx-auto  mt-[80px] w-fit max-sm:text-[10px] sm:text-[#12212E] md:text-[#121b2796]">
