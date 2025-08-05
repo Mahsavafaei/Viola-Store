@@ -7,7 +7,8 @@ import Product from "@/models/Product";
 
 //delete 1
 export async function DELETE(req, { params }) {
-  const { productId } = params;
+  const awaitedParams = await params;
+  const productId = awaitedParams.productId;
 
   try {
     await connectDB();

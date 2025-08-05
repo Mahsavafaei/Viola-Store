@@ -7,7 +7,7 @@ import Logo from './images/y.png';
 import readingBook from './footer/studentGradute.json';
 import enamad from './footer/ENAMAD.png';
 import emptyCart from './images/emptyCart.svg';
-import NotFound from './images/NotFound.svg';
+import NotFound from './images/notFound.svg';
 
 
 export{next, vercel , Logo , readingBook , enamad , emptyCart , NotFound}

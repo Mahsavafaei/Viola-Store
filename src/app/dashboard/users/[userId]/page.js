@@ -4,8 +4,10 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import User from "@/models/User";
 import DashboardUserPage from "@/components/template/dashboard/users/DashboardUserPage";
 
-export default async function DashboardUser({ params: { userId } }) {
-  console.log("userId:", userId);
+export default async function DashboardUser({ params}) {
+   const awaitedParams = await params;
+  const userId = awaitedParams.userId;
+  
 
   const session = await getServerSession(authOptions);
   const role = session.user.name[1];
