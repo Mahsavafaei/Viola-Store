@@ -141,7 +141,7 @@ function StorePage({ products }) {
                     </button>
                     <Link
                       href={"/store/productDetails/" + product._id}
-              
+                className="flex items-center text-darkColor"
                     >
                       <span className="text-xs">جزئیات</span>{" "}
                       <BsCaretLeftFill />{" "}
