@@ -9,8 +9,8 @@ import cellphone from "../../../public/footer/cellphone.png";
 import instagram from "../../../public/footer/instagram.png";
 import readingBook from "../../../public/footer/readingBook.json";
 import enamad from "../../../public/footer/ENAMAD.png";
-import Link from "next/link";
-import Lottie from "lottie-react";
+// import Link from "next/link";
+// import Lottie from "lottie-react";
 
 function Footer() {
   const currentPage = usePathname();
@@ -108,6 +108,7 @@ function Footer() {
          <Suspense fallback={<div>در حال بارگذاری...</div>}>
         <LazyLottie
           animationData={readingBook}
+         
           className=""
           loop={true}
           style={{ height: "350px" }}

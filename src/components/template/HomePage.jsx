@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CartContext } from "@/context/CartContext";
-import { productQuantity } from "@/helpers/helper";
+import { productQuantity, separator } from "@/helpers/helper";
 import Accordion from "../modules/Accordion";
 
 import { FiShoppingCart } from "react-icons/fi";
@@ -136,7 +136,7 @@ function HomePage({ products }) {
                       {product.productName}
                     </p>
                     <span className="font-bold">
-                      {product.productPrice}{" "}
+                      {separator(product.productPrice)}
                       <span className="text-[10px] text-gray-500">تومان</span>{" "}
                     </span>
                   </div>
@@ -194,7 +194,7 @@ function HomePage({ products }) {
                     {product.productName}
                   </p>
                   <span className="font-bold">
-                    {product.productPrice}{" "}
+                    {separator(product.productPrice)}{" "}
                     <span className="text-[10px] text-gray-500">تومان</span>{" "}
                   </span>
                 </div>

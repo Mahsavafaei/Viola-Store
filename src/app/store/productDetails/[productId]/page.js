@@ -1,7 +1,9 @@
 import ProductDetailsPage from "@/components/template/store/ProductDetailsPage";
 import Product from "@/models/Product";
 
-export default async function ProductDetails({ params: { productId } }) {
+export default async function ProductDetails({ params}) {
+  const awaitedParams = await params;
+  const productId = awaitedParams.productId;
    const res = await fetch('http://localhost:3000/api/product' , {method:'GET'})
    const products = await res.json()
   
