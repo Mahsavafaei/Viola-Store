@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { NotFound } from "../../../public/index";
+// import { NotFound } from "../../../public/index";
 
 function NotFoundPage() {
   return (
@@ -8,7 +8,7 @@ function NotFoundPage() {
         <div className="flex flex-col items-center text-xl font-bold text-red-500 ">
           <span>صفحه مورد نظر یافت نشد! </span>
         </div>
-        <Image src={NotFound} width={400} height={400} alt="NotFound" />
+        <Image src={'/images/notFound.svg'} width={400} height={400} alt="NotFound" />
       
       </div>
     </div>
